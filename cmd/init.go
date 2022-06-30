@@ -6,6 +6,7 @@ package cmd
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"os"
 
@@ -17,13 +18,12 @@ var initCmd = &cobra.Command{
 	Short: "Start pluto in a new project",
 	Long:  `Init create a new project with the following files:`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if FileExist("pluto.yaml") {
-			CreateFile("pluto.yaml")
-		}
 
-		if FileExist(".migration") {
-			CreateFile(".migration")
-		}
+		// CreateFile("pluto.yml")
+
+		CopyFile("docs/examples/base.yml", "pluto.yml")
+
+		// CreateFile("migrations/001_users.json")
 	},
 }
 
@@ -32,12 +32,14 @@ func init() {
 }
 
 func CreateFile(fileName string) {
-	file, err := os.Create(fileName)
-	if err != nil {
-		log.Fatal(err)
+	if FileExist(fileName) {
+		file, err := os.Create(fileName)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Printf("Created file: %s\n", fileName)
+		defer file.Close()
 	}
-	fmt.Printf("Created file: %s\n", fileName)
-	defer file.Close()
 }
 
 func FileExist(fileName string) bool {
@@ -48,4 +50,29 @@ func FileExist(fileName string) bool {
 	fmt.Println("x:", x)
 
 	return x
+}
+
+func CopyFile(src, dst string) (int64, error) {
+	sourceFileStat, err := os.Stat(src)
+	if err != nil {
+		return 0, err
+	}
+
+	if !sourceFileStat.Mode().IsRegular() {
+		return 0, fmt.Errorf("%s is not a regular file", src)
+	}
+
+	source, err := os.Open(src)
+	if err != nil {
+		return 0, err
+	}
+	defer source.Close()
+
+	destination, err := os.Create(dst)
+	if err != nil {
+		return 0, err
+	}
+	defer destination.Close()
+	nBytes, err := io.Copy(destination, source)
+	return nBytes, err
 }
