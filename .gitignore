@@ -53,3 +53,4 @@ go.work
 
 # Pluto
 pluto.yaml
+.migration
