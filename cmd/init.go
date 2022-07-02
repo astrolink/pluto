@@ -5,7 +5,7 @@ Copyright © 2022 ROGER SOUZA <rogersilvasouza@hotmail.com>
 package cmd
 
 import (
-	"pluto/common"
+	file "pluto/common"
 
 	"github.com/spf13/cobra"
 )
@@ -18,7 +18,7 @@ var initCmd = &cobra.Command{
 
 		// CreateFile("pluto.yml")
 
-		common.CopyFile("docs/examples/base.yml", "pluto.yml")
+		file.CopyFile("docs/examples/base.yml", "pluto.yml")
 
 		// CreateFile("migrations/001_users.json")
 	},
