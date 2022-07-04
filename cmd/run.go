@@ -12,10 +12,23 @@ import (
 	"log"
 	"os"
 
+	"gopkg.in/yaml.v3"
+
 	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/spf13/cobra"
 )
+
+type Connection struct {
+	Connection struct {
+		Name     string `yaml:"name"`
+		Host     string `yaml:"host"`
+		Port     string `yaml:"port"`
+		Database string `yaml:"database"`
+		Username string `yaml:"username"`
+		Password string `yaml:"password"`
+	}
+}
 
 var runCmd = &cobra.Command{
 	Use:   "run",
@@ -41,8 +54,14 @@ var runCmd = &cobra.Command{
 		var result map[string]interface{}
 		json.Unmarshal([]byte(byteValue), &result)
 
+		// Yaml
+		connection := readYml()
+
 		// MySQL
-		db, err := sql.Open("mysql", "root:secret@tcp(127.0.0.1:3306)/api")
+		// db, err := sql.Open("mysql", "root:secret@tcp(127.0.0.1:3306)/api")
+		mysql := connection.Connection.Username + ":secret@tcp(127.0.0.1:3306)/api"
+
+		db, err := sql.Open("mysql", mysql)
 
 		if err != nil {
 			log.Fatal(err)
@@ -54,4 +73,23 @@ var runCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(runCmd)
+}
+
+func readYml() Connection {
+	fileName := "pluto.yml"
+
+	yamlFile, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		fmt.Printf("Error reading YAML file: %s\n", err)
+	}
+
+	var yamlConfig Connection
+	err = yaml.Unmarshal(yamlFile, &yamlConfig)
+	if err != nil {
+		fmt.Printf("Error parsing YAML file: %s\n", err)
+	}
+
+	// fmt.Printf("Result: %v\n", yamlConfig.Connection)
+
+	return yamlConfig
 }
