@@ -1,6 +1,5 @@
 /*
 Copyright © 2022 ROGER SOUZA <rogersilvasouza@hotmail.com>
-
 */
 package cmd
 
@@ -11,6 +10,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"time"
 
 	"gopkg.in/yaml.v3"
 
@@ -59,9 +59,10 @@ var runCmd = &cobra.Command{
 
 		// MySQL
 		// db, err := sql.Open("mysql", "root:secret@tcp(127.0.0.1:3306)/api")
-		mysql := connection.Connection.Username + ":secret@tcp(127.0.0.1:3306)/api"
+		mysql := connection.Connection.Username + ":@tcp(127.0.0.1:3306)/astrolink"
 
 		db, err := sql.Open("mysql", mysql)
+		db.SetConnMaxLifetime(time.Minute * 1)
 
 		if err != nil {
 			log.Fatal(err)
@@ -89,7 +90,7 @@ func readYml() Connection {
 		fmt.Printf("Error parsing YAML file: %s\n", err)
 	}
 
-	// fmt.Printf("Result: %v\n", yamlConfig.Connection)
+	fmt.Printf("Result: %v\n", yamlConfig.Connection.Name)
 
 	return yamlConfig
 }
