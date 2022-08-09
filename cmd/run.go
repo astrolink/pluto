@@ -68,7 +68,12 @@ var runCmd = &cobra.Command{
 			log.Fatal(err)
 		}
 
-		db.QueryRow(result["run"].(string))
+		fmt.Printf("SQL: %v\n", result["run"])
+
+		_, execErr := db.Exec(result["run"].(string))
+		if execErr != nil {
+			log.Fatal(execErr)
+		}
 	},
 }
 
