@@ -1,6 +1,5 @@
 /*
 Copyright © 2022 ROGER SOUZA <rogersilvasouza@hotmail.com>
-
 */
 package cmd
 

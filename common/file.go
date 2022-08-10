@@ -20,15 +20,18 @@ func CreateFile(fileName string) {
 
 func FileExist(fileName string) bool {
 	_, err := os.Stat(fileName)
-	fmt.Println("err:", err)
 
 	x := os.IsNotExist(err)
-	fmt.Println("x:", x)
 
 	return x
 }
 
 func CopyFile(src, dst string) (int64, error) {
+	exist := FileExist(dst)
+	if !exist {
+		return 0, nil
+	}
+
 	sourceFileStat, err := os.Stat(src)
 	if err != nil {
 		return 0, err
