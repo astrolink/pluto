@@ -21,7 +21,7 @@ import (
 
 type Connection struct {
 	Connection struct {
-		Type     string `yaml:"type"`
+		Drive    string `yaml:"drive"`
 		Host     string `yaml:"host"`
 		Port     string `yaml:"port"`
 		Database string `yaml:"database"`
@@ -95,7 +95,7 @@ func readYml() Connection {
 		fmt.Printf("Error parsing YAML file: %s\n", err)
 	}
 
-	fmt.Printf("Result: %v\n", yamlConfig.Connection.Type)
+	fmt.Printf("Result: %v\n", yamlConfig.Connection.Drive)
 
 	return yamlConfig
 }
