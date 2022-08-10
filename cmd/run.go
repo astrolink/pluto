@@ -26,11 +26,11 @@ var runCmd = &cobra.Command{
 
 				switch result["database"] {
 				case "postgre":
-					postgre.Execute(result, file.Name())
+					postgre.Execute(result, file.Name(), "run")
 				case "mysql":
-					mysql.Execute(result, file.Name())
+					mysql.Execute(result, file.Name(), "run")
 				default:
-					mysql.Execute(result, file.Name())
+					mysql.Execute(result, file.Name(), "run")
 				}
 			}
 		}
