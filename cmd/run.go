@@ -7,7 +7,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"os"
 	"time"
@@ -57,16 +57,13 @@ var runCmd = &cobra.Command{
 
 				defer jsonFile.Close()
 
-				byteValue, _ := ioutil.ReadAll(jsonFile)
+				byteValue, _ := io.ReadAll(jsonFile)
 
 				var result map[string]interface{}
 				json.Unmarshal([]byte(byteValue), &result)
 
-				// Yaml
 				connection := readYml()
 
-				// MySQL
-				// db, err := sql.Open("mysql", "root:secret@tcp(127.0.0.1:3306)/api")
 				mysql := connection.Connection.Username + ":@tcp(127.0.0.1:3306)/astrolink"
 
 				db, err := sql.Open("mysql", mysql)
@@ -94,7 +91,7 @@ func init() {
 func readYml() Connection {
 	fileName := "pluto.yml"
 
-	yamlFile, err := ioutil.ReadFile(fileName)
+	yamlFile, err := os.ReadFile(fileName)
 	if err != nil {
 		fmt.Printf("Error reading YAML file: %s\n", err)
 	}
