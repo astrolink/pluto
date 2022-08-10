@@ -3,6 +3,8 @@ package common
 import (
 	"fmt"
 	"io"
+	"io/fs"
+	"io/ioutil"
 	"log"
 	"os"
 )
@@ -59,4 +61,19 @@ func CopyFile(src, dst string) (int64, error) {
 
 func CreateFolder(folderName string) {
 	os.Mkdir(folderName, 0755)
+}
+
+func ReadFiles() []fs.FileInfo {
+	pwd, err := os.Getwd()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	files, err := ioutil.ReadDir(pwd + "/migrations/")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return files
 }

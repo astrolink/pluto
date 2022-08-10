@@ -17,6 +17,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/spf13/cobra"
+
+	file "pluto/common"
 )
 
 type Connection struct {
@@ -35,44 +37,52 @@ var runCmd = &cobra.Command{
 	Short: "Run migrations",
 	Long:  `Long Description`,
 	Run: func(cmd *cobra.Command, args []string) {
-		pwd, err := os.Getwd()
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
-		}
+		files := file.ReadFiles()
 
-		jsonFile, err := os.Open(pwd + "/migrations/000001_create_users_table.json")
+		for _, file := range files {
+			if !file.IsDir() {
+				fmt.Println(file.Name(), file.IsDir())
 
-		if err != nil {
-			fmt.Println(err)
-		}
+				pwd, err := os.Getwd()
+				if err != nil {
+					fmt.Println(err)
+					os.Exit(1)
+				}
 
-		defer jsonFile.Close()
+				jsonFile, err := os.Open(pwd + "/migrations/" + file.Name())
 
-		byteValue, _ := ioutil.ReadAll(jsonFile)
+				if err != nil {
+					fmt.Println(err)
+				}
 
-		var result map[string]interface{}
-		json.Unmarshal([]byte(byteValue), &result)
+				defer jsonFile.Close()
 
-		// Yaml
-		connection := readYml()
+				byteValue, _ := ioutil.ReadAll(jsonFile)
 
-		// MySQL
-		// db, err := sql.Open("mysql", "root:secret@tcp(127.0.0.1:3306)/api")
-		mysql := connection.Connection.Username + ":@tcp(127.0.0.1:3306)/astrolink"
+				var result map[string]interface{}
+				json.Unmarshal([]byte(byteValue), &result)
 
-		db, err := sql.Open("mysql", mysql)
-		db.SetConnMaxLifetime(time.Minute * 1)
+				// Yaml
+				connection := readYml()
 
-		if err != nil {
-			log.Fatal(err)
-		}
+				// MySQL
+				// db, err := sql.Open("mysql", "root:secret@tcp(127.0.0.1:3306)/api")
+				mysql := connection.Connection.Username + ":@tcp(127.0.0.1:3306)/astrolink"
 
-		fmt.Printf("SQL: %v\n", result["run"])
+				db, err := sql.Open("mysql", mysql)
+				db.SetConnMaxLifetime(time.Minute * 1)
 
-		_, execErr := db.Exec(result["run"].(string))
-		if execErr != nil {
-			log.Fatal(execErr)
+				if err != nil {
+					log.Fatal(err)
+				}
+
+				fmt.Printf("SQL: %v\n", result["run"])
+
+				_, execErr := db.Exec(result["run"].(string))
+				if execErr != nil {
+					log.Fatal(execErr)
+				}
+			}
 		}
 	},
 }
