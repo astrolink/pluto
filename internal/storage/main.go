@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"io/fs"
@@ -86,4 +87,20 @@ func Pwd() string {
 	}
 
 	return pwd
+}
+
+func ReadJson(name string) map[string]interface{} {
+	jsonFile, err := os.Open(Pwd() + "/migrations/" + name)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer jsonFile.Close()
+
+	byteValue, _ := io.ReadAll(jsonFile)
+
+	var result map[string]interface{}
+	json.Unmarshal([]byte(byteValue), &result)
+
+	return result
 }

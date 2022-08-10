@@ -5,9 +5,7 @@ package cmd
 
 import (
 	"database/sql"
-	"encoding/json"
 	"fmt"
-	"io"
 	"log"
 	"os"
 	"time"
@@ -34,18 +32,7 @@ var runCmd = &cobra.Command{
 
 		for _, file := range files {
 			if !file.IsDir() {
-				jsonFile, err := os.Open(storage.Pwd() + "/migrations/" + file.Name())
-				if err != nil {
-					fmt.Println(err)
-				}
-
-				defer jsonFile.Close()
-
-				byteValue, _ := io.ReadAll(jsonFile)
-
-				var result map[string]interface{}
-				json.Unmarshal([]byte(byteValue), &result)
-
+				var result map[string]interface{} = storage.ReadJson(file.Name())
 				var config string
 
 				switch result["database"] {
