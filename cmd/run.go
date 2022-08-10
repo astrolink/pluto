@@ -26,10 +26,6 @@ var runCmd = &cobra.Command{
 	Short: "Run migrations",
 	Long:  `Long Description`,
 	Run: func(cmd *cobra.Command, args []string) {
-
-		config := env.GetMySQlConfig()
-		fmt.Println(config)
-
 		files := file.ReadFiles()
 
 		for _, file := range files {
@@ -55,16 +51,22 @@ var runCmd = &cobra.Command{
 				var result map[string]interface{}
 				json.Unmarshal([]byte(byteValue), &result)
 
-				mysql := config
+				var config string
 
-				db, err := sql.Open("mysql", mysql)
+				switch result["database"] {
+				case "mysql":
+					config = env.GetMySQlConfig()
+				case "postgre":
+				default:
+					config = env.GetPostgreConfig()
+				}
+
+				db, err := sql.Open("mysql", config)
 				db.SetConnMaxLifetime(time.Minute * 1)
 
 				if err != nil {
 					log.Fatal(err)
 				}
-
-				fmt.Printf("SQL: %v\n", result["run"])
 
 				_, execErr := db.Exec(result["run"].(string))
 				if execErr != nil {
