@@ -1,4 +1,4 @@
-package common
+package internal
 
 import (
 	"fmt"
@@ -76,4 +76,14 @@ func ReadFiles() []fs.FileInfo {
 	}
 
 	return files
+}
+
+func Pwd() string {
+	pwd, err := os.Getwd()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	return pwd
 }

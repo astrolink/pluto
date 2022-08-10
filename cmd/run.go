@@ -16,7 +16,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	file "pluto/common"
+	storage "pluto/internal/storage"
 
 	env "pluto/internal/env"
 )
@@ -26,19 +26,11 @@ var runCmd = &cobra.Command{
 	Short: "Run migrations",
 	Long:  `Long Description`,
 	Run: func(cmd *cobra.Command, args []string) {
-		files := file.ReadFiles()
+		files := storage.ReadFiles()
 
 		for _, file := range files {
 			if !file.IsDir() {
-				fmt.Println(file.Name(), file.IsDir())
-
-				pwd, err := os.Getwd()
-				if err != nil {
-					fmt.Println(err)
-					os.Exit(1)
-				}
-
-				jsonFile, err := os.Open(pwd + "/migrations/" + file.Name())
+				jsonFile, err := os.Open(storage.Pwd() + "/migrations/" + file.Name())
 
 				if err != nil {
 					fmt.Println(err)
