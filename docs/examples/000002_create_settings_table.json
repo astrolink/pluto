@@ -1,0 +1,5 @@
+{
+    "database": "mysql",
+    "run": "CREATE TABLE users_settings (key VARCHAR(20),value VARCHAR(20),created_at DATE);",
+    "rollback": "DROP TABLE users_settings;"
+}
