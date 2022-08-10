@@ -1,9 +1,15 @@
-connection:
-  drive: "mysql"
+mysql:
   host: "127.0.0.1"
-  port: "3306"
-  database: "test"
+  port: 3306
+  database: "api"
   username: "root"
   password: "secret"
 
-log: mysql
+postgre:
+  host: "127.0.0.1"
+  port: "5432"
+  database: "interspirelink"
+  username: "postgres"
+  password: ""
+
+log: "mysql"
