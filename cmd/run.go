@@ -12,31 +12,24 @@ import (
 	"os"
 	"time"
 
-	"gopkg.in/yaml.v3"
-
 	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/spf13/cobra"
 
 	file "pluto/common"
-)
 
-type Connection struct {
-	Connection struct {
-		Drive    string `yaml:"drive"`
-		Host     string `yaml:"host"`
-		Port     string `yaml:"port"`
-		Database string `yaml:"database"`
-		Username string `yaml:"username"`
-		Password string `yaml:"password"`
-	}
-}
+	env "pluto/internal/env"
+)
 
 var runCmd = &cobra.Command{
 	Use:   "run",
 	Short: "Run migrations",
 	Long:  `Long Description`,
 	Run: func(cmd *cobra.Command, args []string) {
+
+		config := env.GetMySQlConfig()
+		fmt.Println(config)
+
 		files := file.ReadFiles()
 
 		for _, file := range files {
@@ -62,9 +55,7 @@ var runCmd = &cobra.Command{
 				var result map[string]interface{}
 				json.Unmarshal([]byte(byteValue), &result)
 
-				connection := readYml()
-
-				mysql := connection.Connection.Username + ":@tcp(127.0.0.1:3306)/astrolink"
+				mysql := config
 
 				db, err := sql.Open("mysql", mysql)
 				db.SetConnMaxLifetime(time.Minute * 1)
@@ -86,23 +77,4 @@ var runCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(runCmd)
-}
-
-func readYml() Connection {
-	fileName := "pluto.yml"
-
-	yamlFile, err := os.ReadFile(fileName)
-	if err != nil {
-		fmt.Printf("Error reading YAML file: %s\n", err)
-	}
-
-	var yamlConfig Connection
-	err = yaml.Unmarshal(yamlFile, &yamlConfig)
-	if err != nil {
-		fmt.Printf("Error parsing YAML file: %s\n", err)
-	}
-
-	fmt.Printf("Result: %v\n", yamlConfig.Connection.Drive)
-
-	return yamlConfig
 }
