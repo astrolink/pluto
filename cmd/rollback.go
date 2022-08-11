@@ -13,9 +13,9 @@ import (
 	"pluto/internal/storage"
 )
 
-var runCmd = &cobra.Command{
-	Use:   "run",
-	Short: "Run migrations",
+var rollbackCmd = &cobra.Command{
+	Use:   "rollback",
+	Short: "Rollback migrations",
 	Long:  `Long Description`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var files []fs.FileInfo = storage.ReadFiles()
@@ -26,11 +26,11 @@ var runCmd = &cobra.Command{
 
 				switch result["database"] {
 				case "postgre":
-					postgre.Execute(result, file.Name(), "run")
+					postgre.Execute(result, file.Name(), "rollback")
 				case "mysql":
-					mysql.Execute(result, file.Name(), "run")
+					mysql.Execute(result, file.Name(), "rollback")
 				default:
-					mysql.Execute(result, file.Name(), "run")
+					mysql.Execute(result, file.Name(), "rollback")
 				}
 			}
 		}
@@ -38,5 +38,5 @@ var runCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(runCmd)
+	rootCmd.AddCommand(rollbackCmd)
 }

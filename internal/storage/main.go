@@ -1,8 +1,11 @@
-package common
+package storage
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
+	"io/fs"
+	"io/ioutil"
 	"log"
 	"os"
 )
@@ -59,4 +62,45 @@ func CopyFile(src, dst string) (int64, error) {
 
 func CreateFolder(folderName string) {
 	os.Mkdir(folderName, 0755)
+}
+
+func ReadFiles() []fs.FileInfo {
+	pwd, err := os.Getwd()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	files, err := ioutil.ReadDir(pwd + "/migrations/")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return files
+}
+
+func Pwd() string {
+	pwd, err := os.Getwd()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	return pwd
+}
+
+func ReadJson(name string) map[string]interface{} {
+	jsonFile, err := os.Open(Pwd() + "/migrations/" + name)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer jsonFile.Close()
+
+	byteValue, _ := io.ReadAll(jsonFile)
+
+	var result map[string]interface{}
+	json.Unmarshal([]byte(byteValue), &result)
+
+	return result
 }
