@@ -23,8 +23,6 @@ func Execute(result map[string]interface{}, file string, cmd string) {
 		cmd = "run"
 	}
 
-	fmt.Println(green.Render("Executing: " + file))
-
 	var config string = env.GetMySQlConfig()
 
 	db, err := sql.Open("mysql", config)
@@ -42,6 +40,8 @@ func Execute(result map[string]interface{}, file string, cmd string) {
 			fmt.Println(red.Render(execErr.Error()))
 			os.Exit(1)
 		}
+
+		fmt.Println(green.Render("Executing: " + file))
 
 		Log(file, 1, "Migration executed successfully")
 	} else {
