@@ -19,7 +19,7 @@ pluto run
 To run rollback migrations
 
 ```sh
-pluto rollback
+pluto rollback step=-1
 ```
 
 # How to test local
