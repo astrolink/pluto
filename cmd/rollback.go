@@ -8,6 +8,7 @@ import (
 	"io/fs"
 	"os"
 	"sort"
+	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -32,7 +33,7 @@ var rollbackCmd = &cobra.Command{
 
 		for _, file := range files {
 			if mysql.CheckRollback(file.Name()) {
-				if !file.IsDir() {
+				if !file.IsDir() && strings.Contains(file.Name(), ".json") {
 					var result map[string]interface{} = storage.ReadJson(file.Name())
 
 					switch result["database"] {
@@ -43,10 +44,10 @@ var rollbackCmd = &cobra.Command{
 					default:
 						mysql.Rollback(result, file.Name(), args[0])
 					}
-				}
 
-				if args[0] == "step=-1" {
-					break
+					if args[0] == "step=-1" {
+						break
+					}
 				}
 			}
 		}

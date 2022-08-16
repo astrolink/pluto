@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"io/fs"
+	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -21,7 +22,7 @@ var runCmd = &cobra.Command{
 		var files []fs.FileInfo = storage.ReadFiles()
 
 		for _, file := range files {
-			if !file.IsDir() {
+			if !file.IsDir() && strings.Contains(file.Name(), ".json") {
 				var result map[string]interface{} = storage.ReadJson(file.Name())
 
 				switch result["database"] {
