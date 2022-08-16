@@ -126,7 +126,8 @@ func CreatePlutoFile() {
 		"  username: \"postgres\"\n" +
 		"  password: \"\"\n" +
 		"\n" +
-		"log: \"mysql\"")
+		"log: \"mysql\"\n" +
+		"source: \"api\"")
 	err := os.WriteFile("pluto.yml", file, 0644)
 	if err != nil {
 		panic(err)
