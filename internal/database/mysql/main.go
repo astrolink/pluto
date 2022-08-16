@@ -56,6 +56,7 @@ func Execute(result map[string]interface{}, file string, cmd string) {
 
 func Log(file string, success int, message string) {
 	var config string = env.GetMySQlConfig()
+	var source string = env.GetSource()
 
 	db, err := sql.Open("mysql", config)
 	if err != nil {
@@ -64,13 +65,13 @@ func Log(file string, success int, message string) {
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 
-	_, execErr := db.Exec("CREATE TABLE IF NOT EXISTS `pluto_logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `date` datetime NOT NULL, `file` varchar(255) NOT NULL, `success` tinyint(1) NOT NULL DEFAULT '0', `message` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;")
+	_, execErr := db.Exec("CREATE TABLE IF NOT EXISTS `pluto_logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `source` varchar(255) NOT NULL, `date` datetime NOT NULL, `file` varchar(255) NOT NULL, `success` tinyint(1) NOT NULL DEFAULT '0', `message` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;")
 	if execErr != nil {
 		fmt.Println(red.Render(execErr.Error()))
 		os.Exit(1)
 	}
 
-	_, Err := db.Exec("INSERT INTO `pluto_logs` (`date`, `file`, `success`, `message`) VALUES (NOW(), '" + file + "', " + strconv.Itoa(success) + ", '" + message + "');")
+	_, Err := db.Exec("INSERT INTO `pluto_logs` (`date`, `source`, `file`, `success`, `message`) VALUES (NOW(), '" + source + "', '" + file + "', " + strconv.Itoa(success) + ", '" + message + "');")
 	if Err != nil {
 		fmt.Println(red.Render(Err.Error()))
 		os.Exit(1)
@@ -82,6 +83,7 @@ func Log(file string, success int, message string) {
 func Check(file string) bool {
 	var config string = env.GetMySQlConfig()
 	var checked bool = false
+	var source string = env.GetSource()
 
 	db, err := sql.Open("mysql", config)
 	if err != nil {
@@ -90,14 +92,14 @@ func Check(file string) bool {
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 
-	_, execErr := db.Exec("CREATE TABLE IF NOT EXISTS `pluto_logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `date` datetime NOT NULL, `file` varchar(255) NOT NULL, `success` tinyint(1) NOT NULL DEFAULT '0', `message` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;")
+	_, execErr := db.Exec("CREATE TABLE IF NOT EXISTS `pluto_logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `source` varchar(255) NOT NULL, `date` datetime NOT NULL, `file` varchar(255) NOT NULL, `success` tinyint(1) NOT NULL DEFAULT '0', `message` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;")
 	if execErr != nil {
 		fmt.Println(red.Render(execErr.Error()))
 		os.Exit(1)
 	}
 
 	var col string
-	sqlStatement := "SELECT id FROM `pluto_logs` WHERE (`file` = '" + file + "') AND (success = 1) LIMIT 1;"
+	sqlStatement := "SELECT id FROM `pluto_logs` WHERE (`file` = '" + file + "') AND (`source` = '" + source + "') AND (success = 1) LIMIT 1;"
 	row := db.QueryRow(sqlStatement)
 	err2 := row.Scan(&col)
 	if err2 != nil {
@@ -113,6 +115,7 @@ func Check(file string) bool {
 func CheckRollback(file string) bool {
 	var config string = env.GetMySQlConfig()
 	var checked bool = false
+	var source string = env.GetSource()
 
 	db, err := sql.Open("mysql", config)
 	if err != nil {
@@ -121,14 +124,14 @@ func CheckRollback(file string) bool {
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 
-	_, execErr := db.Exec("CREATE TABLE IF NOT EXISTS `pluto_logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `date` datetime NOT NULL, `file` varchar(255) NOT NULL, `success` tinyint(1) NOT NULL DEFAULT '0', `message` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;")
+	_, execErr := db.Exec("CREATE TABLE IF NOT EXISTS `pluto_logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `source` varchar(255) NOT NULL, `date` datetime NOT NULL, `file` varchar(255) NOT NULL, `success` tinyint(1) NOT NULL DEFAULT '0', `message` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;")
 	if execErr != nil {
 		fmt.Println(red.Render(execErr.Error()))
 		os.Exit(1)
 	}
 
 	var col string
-	sqlStatement := "SELECT id FROM `pluto_logs` WHERE (`file` = '" + file + "') AND (success = 1) LIMIT 1;"
+	sqlStatement := "SELECT id FROM `pluto_logs` WHERE (`file` = '" + file + "') AND (`source` = '" + source + "') AND (success = 1) LIMIT 1;"
 	row := db.QueryRow(sqlStatement)
 	err2 := row.Scan(&col)
 	if err2 == nil {
@@ -141,6 +144,7 @@ func CheckRollback(file string) bool {
 
 func Rollback(result map[string]interface{}, file string, step string) {
 	var config string = env.GetMySQlConfig()
+	var source string = env.GetSource()
 
 	db, err := sql.Open("mysql", config)
 	if err != nil {
@@ -156,7 +160,7 @@ func Rollback(result map[string]interface{}, file string, step string) {
 		os.Exit(1)
 	}
 
-	_, delErr := db.Exec("DELETE FROM `pluto_logs` WHERE (`file` = '" + file + "');")
+	_, delErr := db.Exec("DELETE FROM `pluto_logs` WHERE (`file` = '" + file + "') AND (`source` = '" + source + "');")
 	if delErr != nil {
 		fmt.Println(red.Render("There was an error deleting rollback: " + file))
 		fmt.Println(red.Render(delErr.Error()))

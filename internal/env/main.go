@@ -42,3 +42,7 @@ func GetPostgreConfig() string {
 
 	return config
 }
+
+func GetSource() string {
+	return GetConfig("source")
+}
