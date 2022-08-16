@@ -104,3 +104,49 @@ func ReadJson(name string) map[string]interface{} {
 
 	return result
 }
+
+func CreatePlutoFile() {
+	exist := FileExist("pluto.yml")
+	if !exist {
+		fmt.Println(exist)
+		os.Exit(1)
+	}
+
+	file := []byte("mysql:\n" +
+		"  host: \"127.0.0.1\"\n" +
+		"  port: 3306\n" +
+		"  database: \"api\"\n" +
+		"  username: \"root\"\n" +
+		"  password: \"secret\"\n" +
+		"\n" +
+		"postgre:\n" +
+		"  host: \"127.0.0.1\"\n" +
+		"  port: 5432\n" +
+		"  database: \"base\"\n" +
+		"  username: \"postgres\"\n" +
+		"  password: \"\"\n" +
+		"\n" +
+		"log: \"mysql\"")
+	err := os.WriteFile("pluto.yml", file, 0644)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func CreateMigrationFile() {
+	exist := FileExist("migrations/000001_create_users_table.json")
+	if !exist {
+		fmt.Println(exist)
+		os.Exit(1)
+	}
+
+	file := []byte("{\n" +
+		"    \"database\": \"mysql\",\n" +
+		"    \"run\": \"CREATE TABLE users (name VARCHAR(20),email VARCHAR(20),created_at DATE);\",\n" +
+		"    \"rollback\": \"DROP TABLE users;\"\n" +
+		"}\n")
+	err := os.WriteFile("migrations/000001_create_users_table.json", file, 0644)
+	if err != nil {
+		panic(err)
+	}
+}

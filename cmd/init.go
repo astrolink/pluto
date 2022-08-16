@@ -14,13 +14,11 @@ var initCmd = &cobra.Command{
 	Short: "Start pluto in a new project",
 	Long:  `Init create a new project with the following files:`,
 	Run: func(cmd *cobra.Command, args []string) {
-		storage.CopyFile("docs/examples/base.yml", "pluto.yml")
+		storage.CreatePlutoFile()
 
 		storage.CreateFolder("migrations")
 
-		storage.CopyFile("docs/examples/000001_create_users_table.json", "migrations/000001_create_users_table.json")
-
-		storage.CopyFile("docs/examples/000002_create_settings_table.json", "migrations/000002_create_settings_table.json")
+		storage.CreateMigrationFile()
 	},
 }
 
