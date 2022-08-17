@@ -24,7 +24,10 @@ pluto rollback step=-1
 
 # How to test local
 
+Use golang 1.19+
+
 ```sh
+go mod tidy
 go build
 mv pluto /usr/local/bin/pluto
 ```
