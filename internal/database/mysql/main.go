@@ -11,6 +11,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 
 	env "pluto/internal/env"
+	"pluto/internal/storage"
 
 	"github.com/charmbracelet/lipgloss"
 )
@@ -19,10 +20,12 @@ var red = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FF0000"))
 var green = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#7CFC00"))
 var orange = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFA500"))
 
-func Execute(result map[string]interface{}, file string, cmd string) {
+func Execute(result storage.PlutoXml, file string, cmd string) {
 	if cmd == "" {
 		cmd = "run"
 	}
+
+	file = storage.RemoveExtensionFromFile(file)
 
 	var config string = env.GetMySQlConfig()
 
@@ -34,7 +37,7 @@ func Execute(result map[string]interface{}, file string, cmd string) {
 	db.SetConnMaxLifetime(time.Minute * 1)
 
 	if Check(file) && cmd == "run" {
-		_, execErr := db.Exec(result[cmd].(string))
+		_, execErr := db.Exec(result.Run)
 		if execErr != nil {
 			// Log(file, 0, "There was an error, please check the log")
 			fmt.Println(red.Render("There was an error running a migration: " + file))
@@ -57,6 +60,7 @@ func Execute(result map[string]interface{}, file string, cmd string) {
 func Log(file string, success int, message string) {
 	var config string = env.GetMySQlConfig()
 	var source string = env.GetSource()
+	file = storage.RemoveExtensionFromFile(file)
 
 	db, err := sql.Open("mysql", config)
 	if err != nil {
@@ -84,6 +88,7 @@ func Check(file string) bool {
 	var config string = env.GetMySQlConfig()
 	var checked bool = false
 	var source string = env.GetSource()
+	file = storage.RemoveExtensionFromFile(file)
 
 	db, err := sql.Open("mysql", config)
 	if err != nil {
@@ -116,6 +121,7 @@ func CheckRollback(file string) bool {
 	var config string = env.GetMySQlConfig()
 	var checked bool = false
 	var source string = env.GetSource()
+	file = storage.RemoveExtensionFromFile(file)
 
 	db, err := sql.Open("mysql", config)
 	if err != nil {
@@ -145,6 +151,7 @@ func CheckRollback(file string) bool {
 func Rollback(result map[string]interface{}, file string, step string) {
 	var config string = env.GetMySQlConfig()
 	var source string = env.GetSource()
+	file = storage.RemoveExtensionFromFile(file)
 
 	db, err := sql.Open("mysql", config)
 	if err != nil {

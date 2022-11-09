@@ -22,10 +22,10 @@ var runCmd = &cobra.Command{
 		var files []fs.FileInfo = storage.ReadFiles()
 
 		for _, file := range files {
-			if !file.IsDir() && strings.Contains(file.Name(), ".json") {
-				var result map[string]interface{} = storage.ReadJson(file.Name())
+			if !file.IsDir() && strings.Contains(file.Name(), ".xml") {
+				result := storage.ReadXml(file.Name())
 
-				switch result["database"] {
+				switch result.Database {
 				case "postgre":
 					postgre.Execute(result, file.Name(), "run")
 				case "mysql":

@@ -10,11 +10,12 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 
 	env "pluto/internal/env"
+	"pluto/internal/storage"
 
 	"github.com/charmbracelet/lipgloss"
 )
 
-func Execute(result map[string]interface{}, file string, cmd string) {
+func Execute(result storage.PlutoXml, file string, cmd string) {
 	if cmd == "" {
 		cmd = "run"
 	}
@@ -29,7 +30,7 @@ func Execute(result map[string]interface{}, file string, cmd string) {
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 
-	_, execErr := db.Exec(result[cmd].(string))
+	_, execErr := db.Exec(result.Run)
 	if execErr != nil {
 		fmt.Println(red.Render("There was an error running a migration: " + file))
 		fmt.Println(red.Render(execErr.Error()))

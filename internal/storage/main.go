@@ -2,12 +2,14 @@ package storage
 
 import (
 	"encoding/json"
+	"encoding/xml"
 	"fmt"
 	"io"
 	"io/fs"
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 )
 
 func CreateFile(fileName string) {
@@ -105,6 +107,29 @@ func ReadJson(name string) map[string]interface{} {
 	return result
 }
 
+type PlutoXml struct {
+	XMLName  xml.Name `xml:"pluto"`
+	Database string   `xml:"database"`
+	Run      string   `xml:"run"`
+	Rollback string   `xml:"rollback"`
+}
+
+func ReadXml(name string) PlutoXml {
+	xmlFile, err := os.Open(Pwd() + "/migrations/" + name)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer xmlFile.Close()
+
+	byteValue, _ := ioutil.ReadAll(xmlFile)
+
+	var result PlutoXml
+	xml.Unmarshal(byteValue, &result)
+
+	return result
+}
+
 func CreatePlutoFile() {
 	exist := FileExist("pluto.yml")
 	if !exist {
@@ -174,4 +199,10 @@ func CreateMigrationXmlFile() {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func RemoveExtensionFromFile(file string) string {
+	file = strings.Replace(file, ".json", "", 1)
+	file = strings.Replace(file, ".xml", "", 1)
+	return file
 }
