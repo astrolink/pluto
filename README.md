@@ -41,9 +41,8 @@ pluto init
 Create new release
 
 ```sh
-git flow release start 0.1.0
-git flow release finish '0.1.0'
-git push origin 0.1.0
+git flow release start v0.1.0
+git push origin v0.1.0
 ```
 
 Download package
