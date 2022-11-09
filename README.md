@@ -42,6 +42,7 @@ Create new release
 
 ```sh
 git flow release start v0.1.0
+git flow release finish 'v0.1.0'
 git push origin v0.1.0
 ```
 
