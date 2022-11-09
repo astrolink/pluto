@@ -49,5 +49,6 @@ git push origin 0.1.0
 Download package
 
 ```sh
-go get -v github.com/astrolink/pluto
+go get -v github.com/astrolink/pluto@0.1.2
+go mod vendor
 ```
