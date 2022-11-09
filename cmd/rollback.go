@@ -33,10 +33,10 @@ var rollbackCmd = &cobra.Command{
 
 		for _, file := range files {
 			if mysql.CheckRollback(file.Name()) {
-				if !file.IsDir() && strings.Contains(file.Name(), ".json") {
-					var result map[string]interface{} = storage.ReadJson(file.Name())
+				if !file.IsDir() && strings.Contains(file.Name(), ".xml") {
+					var result storage.PlutoXml = storage.ReadXml(file.Name())
 
-					switch result["database"] {
+					switch result.Database {
 					case "postgre":
 						mysql.Rollback(result, file.Name(), args[0])
 					case "mysql":

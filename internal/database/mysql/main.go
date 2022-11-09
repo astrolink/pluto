@@ -148,7 +148,7 @@ func CheckRollback(file string) bool {
 	return checked
 }
 
-func Rollback(result map[string]interface{}, file string, step string) {
+func Rollback(result storage.PlutoXml, file string, step string) {
 	var config string = env.GetMySQlConfig()
 	var source string = env.GetSource()
 	file = storage.RemoveExtensionFromFile(file)
@@ -160,7 +160,7 @@ func Rollback(result map[string]interface{}, file string, step string) {
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 
-	_, execErr := db.Exec(result["rollback"].(string))
+	_, execErr := db.Exec(result.Rollback)
 	if execErr != nil {
 		fmt.Println(red.Render("There was an error running a rollback: " + file))
 		fmt.Println(red.Render(execErr.Error()))
