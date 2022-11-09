@@ -45,3 +45,9 @@ git flow release start 0.1.0
 git flow release finish '0.1.0'
 git push origin 0.1.0
 ```
+
+Download package
+
+```sh
+go get -v github.com/astrolink/pluto
+```
