@@ -1,0 +1,11 @@
+<pluto>
+    <database>
+        mysql
+    </database>
+    <run>
+        CREATE TABLE users (name VARCHAR(20),email VARCHAR(20),created_at DATE);
+    </run>
+    <rollback>
+        DROP TABLE users;
+    </rollback>
+</note>
