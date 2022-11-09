@@ -18,7 +18,7 @@ var initCmd = &cobra.Command{
 
 		storage.CreateFolder("migrations")
 
-		storage.CreateMigrationFile()
+		storage.CreateMigrationXmlFile()
 	},
 }
 

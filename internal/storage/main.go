@@ -151,3 +151,27 @@ func CreateMigrationFile() {
 		panic(err)
 	}
 }
+
+func CreateMigrationXmlFile() {
+	exist := FileExist("migrations/000001_create_users_table.xml")
+	if !exist {
+		fmt.Println(exist)
+		os.Exit(1)
+	}
+
+	file := []byte("<pluto>\n" +
+		"    <database>\n" +
+		"        mysql\n" +
+		"    </database>\n" +
+		"    <run>\n" +
+		"        CREATE TABLE users (name VARCHAR(20),email VARCHAR(20),created_at DATE);\n" +
+		"    </run>\n" +
+		"    <rollback>\n" +
+		"        DROP TABLE users;\n" +
+		"    </rollback>\n" +
+		"<pluto>\n")
+	err := os.WriteFile("migrations/000001_create_users_table.xml", file, 0644)
+	if err != nil {
+		panic(err)
+	}
+}
