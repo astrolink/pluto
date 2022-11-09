@@ -39,14 +39,4 @@ jobs:
           go-version: '1.17.13'
       - run: go build
 
-      - uses: actions/setup-go@v3
-        with:
-          go-version: '1.16.15'
-      - run: go build
-
-      - uses: actions/setup-go@v3
-        with:
-          go-version: '1.15.15'
-      - run: go build
-
       - run: echo "Finished job's status is ${{ job.status }}."
