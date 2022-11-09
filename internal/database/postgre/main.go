@@ -9,8 +9,8 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	env "pluto/internal/env"
-	"pluto/internal/storage"
+	env "github.com/astrolink/pluto/internal/env"
+	"github.com/astrolink/pluto/internal/storage"
 
 	"github.com/charmbracelet/lipgloss"
 )

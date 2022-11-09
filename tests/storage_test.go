@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 	"os"
-	"pluto/internal/storage"
+	"github.com/astrolink/pluto/internal/storage"
 
 	"testing"
 )

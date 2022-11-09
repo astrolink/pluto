@@ -1,4 +1,4 @@
-module pluto
+module github.com/astrolink/pluto
 
 go 1.19
 

@@ -12,8 +12,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"pluto/internal/database/mysql"
-	"pluto/internal/storage"
+	"github.com/astrolink/pluto/internal/database/mysql"
+	"github.com/astrolink/pluto/internal/storage"
 )
 
 var rollbackCmd = &cobra.Command{

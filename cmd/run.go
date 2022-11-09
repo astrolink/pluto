@@ -9,9 +9,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"pluto/internal/database/mysql"
-	"pluto/internal/database/postgre"
-	"pluto/internal/storage"
+	"github.com/astrolink/pluto/internal/database/mysql"
+	"github.com/astrolink/pluto/internal/database/postgre"
+	"github.com/astrolink/pluto/internal/storage"
 )
 
 var runCmd = &cobra.Command{

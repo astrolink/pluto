@@ -4,7 +4,7 @@ Copyright © 2022 ROGER SOUZA <rogersilvasouza@hotmail.com>
 package cmd
 
 import (
-	storage "pluto/internal/storage"
+	storage "github.com/astrolink/pluto/internal/storage"
 
 	"github.com/spf13/cobra"
 )
