@@ -159,24 +159,6 @@ func CreatePlutoFile() {
 	}
 }
 
-func CreateMigrationFile() {
-	exist := FileExist("migrations/000001_create_users_table.json")
-	if !exist {
-		fmt.Println(exist)
-		os.Exit(1)
-	}
-
-	file := []byte("{\n" +
-		"    \"database\": \"mysql\",\n" +
-		"    \"run\": \"CREATE TABLE users (name VARCHAR(20),email VARCHAR(20),created_at DATE);\",\n" +
-		"    \"rollback\": \"DROP TABLE users;\"\n" +
-		"}\n")
-	err := os.WriteFile("migrations/000001_create_users_table.json", file, 0644)
-	if err != nil {
-		panic(err)
-	}
-}
-
 func CreateMigrationXmlFile() {
 	exist := FileExist("migrations/000001_create_users_table.xml")
 	if !exist {
