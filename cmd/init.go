@@ -12,7 +12,7 @@ import (
 var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Start pluto in a new project",
-	Long:  `Init create a new project with the following files:`,
+	Long:  `Init create a new project with the following files 000001_created_users.xml`,
 	Run: func(cmd *cobra.Command, args []string) {
 		storage.CreatePlutoFile()
 
