@@ -38,6 +38,12 @@ On any folder
 pluto init
 ```
 
+Create new migration
+
+```sh
+pluto make create_settings_table
+```
+
 Create new release
 
 ```sh

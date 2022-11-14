@@ -16,14 +16,14 @@ func RunMigrations() bool {
 	return true
 }
 
-func RunRollback(files []fs.FileInfo, args []string) bool {
+func RunRollback(files []fs.DirEntry, args []string) bool {
 	ExecuteRollback(files, args)
 
 	return true
 }
 
 func ExecuteRun() {
-	var files []fs.FileInfo = storage.ReadFiles()
+	var files []fs.DirEntry = storage.ReadFiles()
 
 	for _, file := range files {
 		if !file.IsDir() && strings.Contains(file.Name(), ".xml") {
@@ -41,7 +41,7 @@ func ExecuteRun() {
 	}
 }
 
-func ExecuteRollback(files []fs.FileInfo, args []string) {
+func ExecuteRollback(files []fs.DirEntry, args []string) {
 	sort.Slice(files, func(i, j int) bool { return files[i].Name() > files[j].Name() })
 
 	for _, file := range files {
