@@ -2,7 +2,6 @@ package pluto
 
 import (
 	"io/fs"
-	"log"
 	"strings"
 
 	"github.com/astrolink/pluto/internal/database/mysql"
