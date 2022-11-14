@@ -177,6 +177,9 @@ func CreateMigrationXmlFile() {
 		"    <rollback>\n" +
 		"        DROP TABLE users;\n" +
 		"    </rollback>\n" +
+		"    <description>\n" +
+		"        Description of what makes the migration, as much information as possible\n" +
+		"    </description>\n" +
 		"<pluto>\n")
 	err := os.WriteFile("migrations/000001_create_users_table.xml", file, 0644)
 	if err != nil {
