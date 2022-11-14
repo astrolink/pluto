@@ -124,6 +124,71 @@ O arquivo XML deve estar em volta da estrutura pluto esse campo e todos os outro
 
 No banco de dados será criado uma tabela **pluto_logs** onde pode ser verificado o que foi ou não rodado e qual é a origem daquela migração
 
+# 🔥 Como utilizar o pluto dentro de outro projeto em Go
+
+Primeiro baixe o projeto como um pacote
+
+```bash
+go get -v github.com/astrolink/pluto@0.1.7
+go mod vendor
+```
+
+Caso queira rodar as migrações a partir de um ponto utilize
+
+```go
+package main
+
+import (
+	"github.com/astrolink/pluto/general/pluto"
+)
+
+func main() {
+	pluto.RunMigrations()
+}
+```
+
+Caso queira rodar o rollback
+
+```go
+package main
+
+import (
+	"github.com/astrolink/pluto/general/pluto"
+)
+
+func main() {
+	pluto.RunRollback()
+}
+```
+
+Dessa forma você pode iniciar o go de dentro do seu projeto e empacotar ele junto.
+
+Lembrando que mesmo nesse modo você, precisa ter a pasta de migrations e o arquivo pluto.yaml
+
+# 🏠 Como testar local
+
+Faça o fork ou baixe o código fonte
+
+Utilize Golang 1.19+
+
+e rode os seguintes comandos
+
+```bash
+go mod tidy
+go build
+mv pluto /usr/local/bin/pluto
+```
+
+# ⚡ Como gerar um novo release
+
+O projeto utiliza o git flow, então faça o seguinte:
+
+```bash
+git flow release start v0.1.x
+git flow release finish 'v0.1.x'
+git push origin v0.1.x
+```
+
 ## 🖊️ A Fazer
 - [ ] PostgreSQL
 - [ ] Melhorar tratamento de erros
