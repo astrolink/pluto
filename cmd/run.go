@@ -20,22 +20,7 @@ var runCmd = &cobra.Command{
 	Short: "Run migrations",
 	Long:  `Long Description`,
 	Run: func(cmd *cobra.Command, args []string) {
-		var files []fs.FileInfo = storage.ReadFiles()
-
-		for _, file := range files {
-			if !file.IsDir() && strings.Contains(file.Name(), ".xml") {
-				result := storage.ReadXml(file.Name())
-
-				switch result.Database {
-				case "postgre":
-					postgre.Execute(result, file.Name(), "run")
-				case "mysql":
-					mysql.Execute(result, file.Name(), "run")
-				default:
-					mysql.Execute(result, file.Name(), "run")
-				}
-			}
-		}
+		executeRun()
 
 		pluto.RunMigrations()
 	},
@@ -43,4 +28,23 @@ var runCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(runCmd)
+}
+
+func executeRun() {
+	var files []fs.FileInfo = storage.ReadFiles()
+
+	for _, file := range files {
+		if !file.IsDir() && strings.Contains(file.Name(), ".xml") {
+			result := storage.ReadXml(file.Name())
+
+			switch result.Database {
+			case "postgre":
+				postgre.Execute(result, file.Name(), "run")
+			case "mysql":
+				mysql.Execute(result, file.Name(), "run")
+			default:
+				mysql.Execute(result, file.Name(), "run")
+			}
+		}
+	}
 }
