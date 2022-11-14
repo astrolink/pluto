@@ -116,15 +116,18 @@ it is suggested to keep the naming standard.
 The XML file must be around the pluto structure this field and all others are mandatory.
 
 **Database**: is which connection it will use from pluto.yml (Possible mysql and postgre)
+
 **Run**: SQL statement that will be run for the next step
+
 **Rollback**: SQL statement that will be run on rollback
+
 **Description**: Description of what is done in that migration will be saved in the database
 
 ## 🖥️ Database
 
 A **pluto_logs** table will be created in the database where you can check what was or was not run and what is the origin of that migration
 
-# 🔥 How to use pluto inside another project in Go
+## 🔥 How to use pluto inside another project in Go
 
 First download the project as a package
 
@@ -165,7 +168,7 @@ That way you can launch go from within your project and package it together.
 
 Remembering that even in this mode you need to have the migrations folder and the pluto.yaml file
 
-# 🏠 How to test location
+## 🏠 How to test location
 
 Fork or download the source code
 
@@ -179,7 +182,7 @@ go build
 mv pluto /usr/local/bin/pluto
 ```
 
-# ⚡ How to generate a new release
+## ⚡ How to generate a new release
 
 The project uses git flow, so do the following:
 

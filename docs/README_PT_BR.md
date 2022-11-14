@@ -116,15 +116,18 @@ Para criar uma nova migration rode o comando make com o nome que a migration vai
 O arquivo XML deve estar em volta da estrutura pluto esse campo e todos os outros são obrigátorio.
 
 **Database**: é qual conexão ele irá utilizar do pluto.yml (Possíveis mysql e postgre)
+
 **Run**: Instrução SQL que será rodado para o passo a frente
+
 **Rollback**: Instrução SQL que será rodado na reversão
+
 **Description**: Descrição do que é feito naquela migração será salvo no banco de dados
 
 ## 🖥️ Banco de dados
 
 No banco de dados será criado uma tabela **pluto_logs** onde pode ser verificado o que foi ou não rodado e qual é a origem daquela migração
 
-# 🔥 Como utilizar o pluto dentro de outro projeto em Go
+## 🔥 Como utilizar o pluto dentro de outro projeto em Go
 
 Primeiro baixe o projeto como um pacote
 
@@ -165,7 +168,7 @@ Dessa forma você pode iniciar o go de dentro do seu projeto e empacotar ele jun
 
 Lembrando que mesmo nesse modo você, precisa ter a pasta de migrations e o arquivo pluto.yaml
 
-# 🏠 Como testar local
+## 🏠 Como testar local
 
 Faça o fork ou baixe o código fonte
 
@@ -179,7 +182,7 @@ go build
 mv pluto /usr/local/bin/pluto
 ```
 
-# ⚡ Como gerar um novo release
+## ⚡ Como gerar um novo release
 
 O projeto utiliza o git flow, então faça o seguinte:
 
