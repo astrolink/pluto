@@ -9,4 +9,7 @@
     <rollback>
         DROP TABLE users;
     </rollback>
+    <description>
+        Description of what makes the migration, as much information as possible
+    </description>
 </pluto>
