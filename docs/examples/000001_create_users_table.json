@@ -1,5 +1,0 @@
-{
-    "database": "mysql",
-    "run": "CREATE TABLE users (name VARCHAR(20),email VARCHAR(20),created_at DATE);",
-    "rollback": "DROP TABLE users;"
-}

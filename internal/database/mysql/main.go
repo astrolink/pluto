@@ -39,7 +39,6 @@ func Execute(result storage.PlutoXml, file string, cmd string) {
 	if Check(file) && cmd == "run" {
 		_, execErr := db.Exec(result.Run)
 		if execErr != nil {
-			// Log(file, 0, "There was an error, please check the log")
 			fmt.Println(red.Render("There was an error running a migration: " + file))
 			fmt.Println(red.Render(execErr.Error()))
 			os.Exit(1)

@@ -11,8 +11,8 @@ import (
 
 var runCmd = &cobra.Command{
 	Use:   "run",
-	Short: "Run migrations",
-	Long:  `Long Description`,
+	Short: "To run all your pending migrations",
+	Long:  `When executing the run, all migrations that have not yet been executed will be executed`,
 	Run: func(cmd *cobra.Command, args []string) {
 		pluto.RunMigrations()
 	},

@@ -10,6 +10,8 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"github.com/charmbracelet/lipgloss"
 )
 
 func CreateFile(fileName string) {
@@ -108,11 +110,14 @@ func ReadJson(name string) map[string]interface{} {
 }
 
 type PlutoXml struct {
-	XMLName  xml.Name `xml:"pluto"`
-	Database string   `xml:"database"`
-	Run      string   `xml:"run"`
-	Rollback string   `xml:"rollback"`
+	XMLName     xml.Name `xml:"pluto"`
+	Database    string   `xml:"database"`
+	Run         string   `xml:"run"`
+	Rollback    string   `xml:"rollback"`
+	Description string   `xml:"description"`
 }
+
+var red = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FF0000"))
 
 func ReadXml(name string) PlutoXml {
 	xmlFile, err := os.Open(Pwd() + "/migrations/" + name)
@@ -133,7 +138,7 @@ func ReadXml(name string) PlutoXml {
 func CreatePlutoFile() {
 	exist := FileExist("pluto.yml")
 	if !exist {
-		fmt.Println(exist)
+		fmt.Println(red.Render("Configuration file already exists, so nothing was created 💀"))
 		os.Exit(1)
 	}
 
@@ -159,24 +164,6 @@ func CreatePlutoFile() {
 	}
 }
 
-func CreateMigrationFile() {
-	exist := FileExist("migrations/000001_create_users_table.json")
-	if !exist {
-		fmt.Println(exist)
-		os.Exit(1)
-	}
-
-	file := []byte("{\n" +
-		"    \"database\": \"mysql\",\n" +
-		"    \"run\": \"CREATE TABLE users (name VARCHAR(20),email VARCHAR(20),created_at DATE);\",\n" +
-		"    \"rollback\": \"DROP TABLE users;\"\n" +
-		"}\n")
-	err := os.WriteFile("migrations/000001_create_users_table.json", file, 0644)
-	if err != nil {
-		panic(err)
-	}
-}
-
 func CreateMigrationXmlFile() {
 	exist := FileExist("migrations/000001_create_users_table.xml")
 	if !exist {
@@ -194,6 +181,9 @@ func CreateMigrationXmlFile() {
 		"    <rollback>\n" +
 		"        DROP TABLE users;\n" +
 		"    </rollback>\n" +
+		"    <description>\n" +
+		"        Description of what makes the migration, as much information as possible\n" +
+		"    </description>\n" +
 		"<pluto>\n")
 	err := os.WriteFile("migrations/000001_create_users_table.xml", file, 0644)
 	if err != nil {
