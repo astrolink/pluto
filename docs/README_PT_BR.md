@@ -31,11 +31,11 @@ Português | [English](../README.md)
 Plutão é um planeta anão e ele representa a transformação, mudanças e reformas.
 E o nosso pluto ajuda o projeto que não tem versionamento de bancos de dados a se organizar e e poder contar com esse recurso muito importante nos dias de hoje.
 
-Obrigado [Laravel](https://github.com/laravel/laravel) nosso projeto de migrações foi inspirado em como o laravel lida com isso.
+Obrigado [Laravel](https://github.com/laravel/laravel) nosso projeto de migrações foi inspirado em como ele lida com isso.
 
 ## 🚀 Características:
-- Suporta vários tipos de bancos de dados: MySQL, PostgreSQL(Implementado);
-- Pequeno o arquivo executavel tem menos de 20mb de tamanho;
+- Suporta vários tipos de bancos de dados: MySQL e PostgreSQL(Implementado);
+- O arquivo executavel tem menos de 20mb de tamanho;
 - Suporta Linux, Windows e Mac OS;
 - Multi Projetos, você pode ter vários projetos se conectando ao mesmo banco de dados, e compartilhando as migrações;
 - Utiliza XML como linguagem de entrada, sendo menos burocratico e aceitando instruções sql bem grandes
@@ -120,7 +120,7 @@ O arquivo XML deve estar em volta da estrutura pluto esse campo e todos os outro
 **Rollback**: Instrução SQL que será rodado na reversão
 **Description**: Descrição do que é feito naquela migração será salvo no banco de dados
 
-## 🐍 Banco de dados
+## 🖥️ Banco de dados
 
 No banco de dados será criado uma tabela **pluto_logs** onde pode ser verificado o que foi ou não rodado e qual é a origem daquela migração
 
