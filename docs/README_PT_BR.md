@@ -20,6 +20,10 @@
       <img alt="Last commit" src="https://img.shields.io/github/last-commit/astrolink/pluto.svg?style=flat-square" />
    </a>
 
+   <a href="https://goreportcard.com/report/github.com/astrolink/pluto">
+      <img alt="Go Report" src="https://goreportcard.com/badge/github.com/astrolink/pluto" />
+   </a>
+
    <br />
 </p>
 
