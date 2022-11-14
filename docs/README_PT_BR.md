@@ -202,6 +202,12 @@ git push origin v0.1.x
 - [ ] Cobertura de 100% do código com teste
 - [ ] Mais comandos utéis de checagem de saúde
 
+## Contribuidores
+
+Obrigado a essas pessoas maravilhosas:
+
+[![Contribuidores](http://contributors.nn.ci/api?repo=astrolink/pluto)](https://github.com/astrolink/pluto/graphs/contributors)
+
 ## 📄 Licença
 
 O código fonte em `pluto` está disponível sob o [MIT License](/LICENSE.md).
