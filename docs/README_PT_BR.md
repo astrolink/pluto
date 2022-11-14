@@ -204,7 +204,7 @@ git push origin v0.1.x
 
 ## Contribuidores
 
-Obrigado a essas pessoas maravilhosas:
+Muito obrigado a todas que ajudaram:
 
 [![Contribuidores](http://contributors.nn.ci/api?repo=astrolink/pluto)](https://github.com/astrolink/pluto/graphs/contributors)
 
