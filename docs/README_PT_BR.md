@@ -50,7 +50,8 @@ Obrigado [Laravel](https://github.com/laravel/laravel) nosso projeto de migraç�
 
 ### Baixe o pacote de instalação mais recente
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v1.0.7/pluto
+wget https://github.com/astrolink/pluto/releases/download/v0.1.8/pluto
+chmod 755 pluto
 mv pluto /usr/local/bin/pluto
 ```
 

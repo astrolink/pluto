@@ -49,7 +49,8 @@ Thanks [Laravel](https://github.com/laravel/laravel) our migrations project was 
 
 ### Download the latest installation package
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v1.0.7/pluto
+wget https://github.com/astrolink/pluto/releases/download/v0.1.8/pluto
+chmod 755 pluto
 mv pluto /usr/local/bin/pluto
 ```
 
@@ -138,7 +139,7 @@ A **pluto_logs** table will be created in the database where you can check what 
 First download the project as a package
 
 ```bash
-go get -v github.com/astrolink/pluto@0.1.7
+go get -v github.com/astrolink/pluto@v0.1.8
 go mod vendor
 ```
 
