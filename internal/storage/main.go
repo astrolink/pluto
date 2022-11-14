@@ -108,10 +108,11 @@ func ReadJson(name string) map[string]interface{} {
 }
 
 type PlutoXml struct {
-	XMLName  xml.Name `xml:"pluto"`
-	Database string   `xml:"database"`
-	Run      string   `xml:"run"`
-	Rollback string   `xml:"rollback"`
+	XMLName     xml.Name `xml:"pluto"`
+	Database    string   `xml:"database"`
+	Run         string   `xml:"run"`
+	Rollback    string   `xml:"rollback"`
+	Description string   `xml:"description"`
 }
 
 func ReadXml(name string) PlutoXml {
