@@ -1,5 +1,3 @@
-# Pluto
-
 <p align="center">
    <img src="https://raw.githubusercontent.com/astrolink/pluto/main/docs/images/astrolink-gopher-compress.png" />
 </p>
