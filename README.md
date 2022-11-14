@@ -52,3 +52,17 @@ Download package
 go get -v github.com/astrolink/pluto@0.1.2
 go mod vendor
 ```
+
+How to Use
+
+```go
+package main
+
+import (
+	"github.com/astrolink/pluto/general/pluto"
+)
+
+func main() {
+	pluto.RunMigrations()
+}
+```
