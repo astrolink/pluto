@@ -2,7 +2,6 @@ package pluto
 
 import (
 	"io/fs"
-	"log"
 	"strings"
 
 	"github.com/astrolink/pluto/internal/database/mysql"
@@ -11,11 +10,7 @@ import (
 )
 
 func RunMigrations() bool {
-	log.Println("Running Migrations")
-
 	ExecuteRun()
-
-	log.Println("Migrations Runned")
 
 	return true
 }
