@@ -139,7 +139,7 @@ No banco de dados será criado uma tabela **pluto_logs** onde pode ser verificad
 Primeiro baixe o projeto como um pacote
 
 ```bash
-go get -v github.com/astrolink/pluto@0.1.7
+go get -v github.com/astrolink/pluto@v0.1.8
 go mod vendor
 ```
 
