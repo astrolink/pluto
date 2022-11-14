@@ -196,3 +196,30 @@ func RemoveExtensionFromFile(file string) string {
 	file = strings.Replace(file, ".xml", "", 1)
 	return file
 }
+
+func CreateNewMigrationXmlFile(file string) {
+	exist := FileExist("migrations/" + file)
+	if !exist {
+		fmt.Println(exist)
+		os.Exit(1)
+	}
+
+	migration := []byte("<pluto>\n" +
+		"    <database>\n" +
+		"        mysql\n" +
+		"    </database>\n" +
+		"    <run>\n" +
+		"        SELECT NOW() FROM DUAL;\n" +
+		"    </run>\n" +
+		"    <rollback>\n" +
+		"        SELECT NOW() FROM DUAL;\n" +
+		"    </rollback>\n" +
+		"    <description>\n" +
+		"        Description of what makes the migration, as much information as possible\n" +
+		"    </description>\n" +
+		"<pluto>\n")
+	err := os.WriteFile("migrations/"+file, migration, 0644)
+	if err != nil {
+		panic(err)
+	}
+}

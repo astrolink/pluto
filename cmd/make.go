@@ -46,6 +46,8 @@ var makeCmd = &cobra.Command{
 			newMigration = newLastIdStr + "_" + args[0] + ".xml"
 		}
 
+		storage.CreateNewMigrationXmlFile(newMigration)
+
 		fmt.Println(green.Render("Migration " + newMigration + " created successfully"))
 	},
 }
