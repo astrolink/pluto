@@ -4,6 +4,8 @@ Copyright © 2022 ROGER SOUZA <rogersilvasouza@hotmail.com>
 package cmd
 
 import (
+	"fmt"
+
 	storage "github.com/astrolink/pluto/internal/storage"
 
 	"github.com/spf13/cobra"
@@ -19,6 +21,8 @@ var initCmd = &cobra.Command{
 		storage.CreateFolder("migrations")
 
 		storage.CreateMigrationXmlFile()
+
+		fmt.Println("Configuration file created and migrations folder started 🎉")
 	},
 }
 

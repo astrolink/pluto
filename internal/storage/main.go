@@ -134,7 +134,7 @@ func ReadXml(name string) PlutoXml {
 func CreatePlutoFile() {
 	exist := FileExist("pluto.yml")
 	if !exist {
-		fmt.Println(exist)
+		fmt.Println("Configuration file already exists, so nothing was created")
 		os.Exit(1)
 	}
 
