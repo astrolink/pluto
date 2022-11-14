@@ -19,7 +19,7 @@ import (
 var rollbackCmd = &cobra.Command{
 	Use:   "rollback",
 	Short: "Rollback migrations",
-	Long:  `Long Description`,
+	Long:  `When performing rollback, migrations are rolled back`,
 	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		var files []fs.FileInfo = storage.ReadFiles()
