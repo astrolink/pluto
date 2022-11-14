@@ -20,6 +20,8 @@
       <img alt="Last commit" src="https://img.shields.io/github/last-commit/astrolink/pluto.svg?style=flat-square" />
    </a>
 
+   <img src="https://img.shields.io/github/go-mod/go-version/astrolink/pluto?style=flat-square">
+
    <a href="https://goreportcard.com/report/github.com/astrolink/pluto">
       <img alt="Go Report" src="https://goreportcard.com/badge/github.com/astrolink/pluto" />
    </a>
@@ -202,7 +204,7 @@ git push origin v0.1.x
 - [ ] Cobertura de 100% do código com teste
 - [ ] Mais comandos utéis de checagem de saúde
 
-## Contribuidores
+## 👋 Contribuidores
 
 Muito obrigado a todas que ajudaram:
 
