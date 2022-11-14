@@ -9,7 +9,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/astrolink/pluto/general"
+	"github.com/astrolink/pluto/general/pluto"
 	"github.com/astrolink/pluto/internal/database/mysql"
 	"github.com/astrolink/pluto/internal/database/postgre"
 	"github.com/astrolink/pluto/internal/storage"
@@ -37,7 +37,7 @@ var runCmd = &cobra.Command{
 			}
 		}
 
-		general.Test()
+		pluto.RunMigrations()
 	},
 }
 
