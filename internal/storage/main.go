@@ -10,6 +10,8 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"github.com/charmbracelet/lipgloss"
 )
 
 func CreateFile(fileName string) {
@@ -115,6 +117,8 @@ type PlutoXml struct {
 	Description string   `xml:"description"`
 }
 
+var red = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FF0000"))
+
 func ReadXml(name string) PlutoXml {
 	xmlFile, err := os.Open(Pwd() + "/migrations/" + name)
 	if err != nil {
@@ -134,7 +138,7 @@ func ReadXml(name string) PlutoXml {
 func CreatePlutoFile() {
 	exist := FileExist("pluto.yml")
 	if !exist {
-		fmt.Println("Configuration file already exists, so nothing was created")
+		fmt.Println(red.Render("Configuration file already exists, so nothing was created 💀"))
 		os.Exit(1)
 	}
 

@@ -7,9 +7,12 @@ import (
 	"fmt"
 
 	storage "github.com/astrolink/pluto/internal/storage"
+	"github.com/charmbracelet/lipgloss"
 
 	"github.com/spf13/cobra"
 )
+
+var green = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#7CFC00"))
 
 var initCmd = &cobra.Command{
 	Use:   "init",
@@ -22,7 +25,7 @@ var initCmd = &cobra.Command{
 
 		storage.CreateMigrationXmlFile()
 
-		fmt.Println("Configuration file created and migrations folder started 🎉")
+		fmt.Println(green.Render("Configuration file created and migrations folder started 🎉"))
 	},
 }
 
