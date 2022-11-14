@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="https://raw.githubusercontent.com/astrolink/pluto/resources/master/logo/gopher.png" />
+   <img src="https://raw.githubusercontent.com/astrolink/pluto/main/docs/images/astrolink-gopher-compress.png" />
 </p>
 
 <p align="center"><b>Pluto </b> [plutão], Essa ferramenta ajudará você a controlar melhor um projeto de banco de dados sem versionamento.</p>
