@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"io/fs"
-	"io/ioutil"
 	"log"
 	"os"
 	"strings"
@@ -68,14 +67,14 @@ func CreateFolder(folderName string) {
 	os.Mkdir(folderName, 0755)
 }
 
-func ReadFiles() []fs.FileInfo {
+func ReadFiles() []fs.DirEntry {
 	pwd, err := os.Getwd()
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
 
-	files, err := ioutil.ReadDir(pwd + "/migrations/")
+	files, err := os.ReadDir(pwd + "/migrations/")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -127,7 +126,7 @@ func ReadXml(name string) PlutoXml {
 
 	defer xmlFile.Close()
 
-	byteValue, _ := ioutil.ReadAll(xmlFile)
+	byteValue, _ := io.ReadAll(xmlFile)
 
 	var result PlutoXml
 	xml.Unmarshal(byteValue, &result)

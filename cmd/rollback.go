@@ -20,7 +20,7 @@ var rollbackCmd = &cobra.Command{
 	Long:  `When performing rollback, migrations are rolled back`,
 	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		var files []fs.FileInfo = storage.ReadFiles()
+		var files []fs.DirEntry = storage.ReadFiles()
 
 		if (args[0] != "all") && (args[0] != "step=-1") {
 			fmt.Println("Invalid argument use all or step=-1")

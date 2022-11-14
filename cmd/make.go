@@ -21,7 +21,7 @@ var makeCmd = &cobra.Command{
 	Long:  `Create a new migration on folder, add new file with sequence`,
 	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		var files []fs.FileInfo = storage.ReadFiles()
+		var files []fs.DirEntry = storage.ReadFiles()
 		var lastId string = "000000"
 		var lastIdArray []string
 		var newMigration string
