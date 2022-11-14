@@ -11,11 +11,7 @@ import (
 )
 
 func RunMigrations() bool {
-	log.Println("Running Migrations")
-
 	ExecuteRun()
-
-	log.Println("Migrations Runned")
 
 	return true
 }
