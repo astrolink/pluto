@@ -51,7 +51,7 @@ Obrigado [Laravel](https://github.com/laravel/laravel) nosso projeto de migraç�
 ### Baixe o pacote de instalação mais recente
 
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.8/pluto
+wget https://github.com/astrolink/pluto/releases/download/v0.1.9/pluto
 chmod 755 pluto
 mv pluto /usr/local/bin/pluto
 ```
@@ -152,7 +152,7 @@ No banco de dados será criado uma tabela **pluto_logs** onde pode ser verificad
 Primeiro baixe o projeto como um pacote
 
 ```bash
-go get -v github.com/astrolink/pluto@v0.1.8
+go get -v github.com/astrolink/pluto@v0.1.9
 go mod vendor
 ```
 
