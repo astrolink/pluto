@@ -78,7 +78,7 @@ pluto -h
 
 ## 🏃 Using
 
-**You must be at the root of the project**
+**_You must be at the root of the project_**
 
 ```bash
 pluto init
