@@ -29,7 +29,6 @@
    <br />
 </p>
 
-
 Português | [English](../README.md)
 
 ## 📖 Introdução:
@@ -40,6 +39,7 @@ E o nosso pluto ajuda o projeto que não tem versionamento de bancos de dados a 
 Obrigado [Laravel](https://github.com/laravel/laravel) nosso projeto de migrações foi inspirado em como ele lida com isso.
 
 ## 🚀 Características:
+
 - Suporta vários tipos de bancos de dados: MySQL e PostgreSQL(Implementado);
 - O arquivo executavel tem menos de 20mb de tamanho;
 - Suporta Linux, Windows e Mac OS;
@@ -49,6 +49,7 @@ Obrigado [Laravel](https://github.com/laravel/laravel) nosso projeto de migraç�
 ## 🧰 Como instalar
 
 ### Baixe o pacote de instalação mais recente
+
 ```bash
 wget https://github.com/astrolink/pluto/releases/download/v0.1.8/pluto
 chmod 755 pluto
@@ -56,6 +57,7 @@ mv pluto /usr/local/bin/pluto
 ```
 
 ## 🏃 Utilizando
+
 **Você deve estar na raiz do projeto**
 
 ```bash
@@ -65,6 +67,7 @@ pluto init
 Irá criar um arquivo chamado pluto.yml e a pasta migrations com um exemplo
 
 Como será o arquivo criado pelo pluto
+
 ```yml
 mysql:
   host: "127.0.0.1"
@@ -99,7 +102,17 @@ pluto make create_users_table
 Para criar uma nova migration rode o comando make com o nome que a migration vai ter
 é sugerido manter o padrão de nomenclatura.
 
+### Como usar
+
+<p align="center">
+
+   <a href="https://github.com/astrolink/pluto">
+      <img alt="Releases" src="https://raw.githubusercontent.com/astrolink/pluto/main/docs/images/how-to-use-pluto.gif" />
+   </a>
+</p>
+
 ## 💻 Arquivo de migração
+
 **O arquivo de migração conta com quatro campos**
 
 ```xml
@@ -200,6 +213,7 @@ git push origin v0.1.x
 ```
 
 ## 🖊️ A Fazer
+
 - [ ] PostgreSQL
 - [ ] Melhorar tratamento de erros
 - [ ] Cobertura de 100% do código com teste

@@ -29,7 +29,6 @@
    <br />
 </p>
 
-
 English | [Português](docs/README_PT_BR.md)
 
 ## 📖 Introduction:
@@ -40,14 +39,17 @@ And our pluto helps the project that doesn't have database versioning to organiz
 Thanks [Laravel](https://github.com/laravel/laravel) our migrations project was inspired by how it handles this.
 
 ## 🚀 Features:
+
 - Supports several types of databases: MySQL and PostgreSQL(Implemented);
 - The executable file is less than 20mb in size;
 - Supports Linux, Windows and Mac OS;
 - Multi Projects, you can have several projects connecting to the same database, and sharing migrations;
 - Uses XML as input language, being less bureaucratic and accepting very large sql statements
+
 ## 🧰 How to install
 
 ### Download the latest installation package
+
 ```bash
 wget https://github.com/astrolink/pluto/releases/download/v0.1.8/pluto
 chmod 755 pluto
@@ -55,6 +57,7 @@ mv pluto /usr/local/bin/pluto
 ```
 
 ## 🏃 Using
+
 **You must be at the root of the project**
 
 ```bash
@@ -99,7 +102,17 @@ pluto make create_users_table
 To create a new migration run the make command with the name that the migration will have
 it is suggested to keep the naming standard.
 
+### How to use
+
+<p align="center">
+
+   <a href="https://github.com/astrolink/pluto">
+      <img alt="Releases" src="https://raw.githubusercontent.com/astrolink/pluto/main/docs/images/how-to-use-pluto.gif" />
+   </a>
+</p>
+
 ## 💻 Migration file
+
 **The migration file has four fields**
 
 ```xml
@@ -200,6 +213,7 @@ git push origin v0.1.x
 ```
 
 ## 🖊️ To Do
+
 - [ ] PostgreSQL
 - [ ] Improve error handling
 - [ ] 100% code coverage with testing
