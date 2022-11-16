@@ -50,9 +50,9 @@ Obrigado [Laravel](https://github.com/laravel/laravel) nosso projeto de migraç�
 
 Baixe o pacote de instalação mais recente
 
-### Instale usando o curl
+### Instale usando o wget
 
-Se você tem o wget instalado use
+Se você já tem o wget instalado use, caso não tenha baixe ele usando o reposítorio de pacotes do seu S.O, ou utilize o método via CURL
 
 ```bash
 wget https://github.com/astrolink/pluto/releases/download/v0.1.9/pluto
@@ -60,9 +60,11 @@ chmod 755 pluto
 mv pluto /usr/local/bin/pluto
 ```
 
+ou
+
 ### Instale usando o CURL
 
-Se você tem o wget instalado use
+Se você já tem o CURL instalado use
 
 ```bash
 curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.9/pluto

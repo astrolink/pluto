@@ -52,13 +52,15 @@ Download the latest installation package
 
 ### Install using wget
 
-If you have wget utilize this
+If you have wget utilize this, if dont download on your S.O or utilize other method
 
 ```bash
 wget https://github.com/astrolink/pluto/releases/download/v0.1.9/pluto
 chmod 755 pluto
 mv pluto /usr/local/bin/pluto
 ```
+
+or
 
 ### Install using CURL
 
