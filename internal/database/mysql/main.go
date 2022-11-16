@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -59,6 +60,7 @@ func Execute(result storage.PlutoXml, file string, cmd string) {
 func Log(file string, success int, message string, description string) {
 	var config string = env.GetMySQlConfig()
 	var source string = env.GetSource()
+	description = strings.Trim(description, " \n")
 	file = storage.RemoveExtensionFromFile(file)
 
 	db, err := sql.Open("mysql", config)
