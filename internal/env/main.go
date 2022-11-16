@@ -28,6 +28,7 @@ func GetMySQlConfig() string {
 	config += ":" + GetConfig("mysql.password")
 	config += "@tcp(" + GetConfig("mysql.host") + ":" + GetConfig("mysql.port") + ")"
 	config += "/" + GetConfig("mysql.database")
+	config += "?multiStatements=true"
 
 	return config
 }
