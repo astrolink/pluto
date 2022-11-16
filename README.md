@@ -48,12 +48,32 @@ Thanks [Laravel](https://github.com/laravel/laravel) our migrations project was 
 
 ## 🧰 How to install
 
-### Download the latest installation package
+Download the latest installation package
+
+### Install using wget
+
+If you have wget utilize this
 
 ```bash
 wget https://github.com/astrolink/pluto/releases/download/v0.1.9/pluto
 chmod 755 pluto
 mv pluto /usr/local/bin/pluto
+```
+
+### Install using CURL
+
+If you have CURL utilize this
+
+```bash
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.9/pluto
+chmod 755 pluto
+mv pluto /usr/local/bin/pluto
+```
+
+To check pluto is properly installed use
+
+```bash
+pluto -h
 ```
 
 ## 🏃 Using

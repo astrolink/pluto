@@ -48,12 +48,32 @@ Obrigado [Laravel](https://github.com/laravel/laravel) nosso projeto de migraç�
 
 ## 🧰 Como instalar
 
-### Baixe o pacote de instalação mais recente
+Baixe o pacote de instalação mais recente
+
+### Instale usando o curl
+
+Se você tem o wget instalado use
 
 ```bash
 wget https://github.com/astrolink/pluto/releases/download/v0.1.9/pluto
 chmod 755 pluto
 mv pluto /usr/local/bin/pluto
+```
+
+### Instale usando o CURL
+
+Se você tem o wget instalado use
+
+```bash
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.9/pluto
+chmod 755 pluto
+mv pluto /usr/local/bin/pluto
+```
+
+Verifique se o pluto foi devidamente instalado usando:
+
+```bash
+pluto -h
 ```
 
 ## 🏃 Utilizando
