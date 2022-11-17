@@ -55,7 +55,7 @@ Download the latest installation package
 If you have wget utilize this, if dont download on your S.O or utilize other method
 
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.10/pluto
+wget https://github.com/astrolink/pluto/releases/download/v0.1.11/pluto
 chmod 755 pluto
 mv pluto /usr/local/bin/pluto
 ```
@@ -67,7 +67,7 @@ or
 If you have CURL utilize this
 
 ```bash
-curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.10/pluto
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.11/pluto
 chmod 755 pluto
 mv pluto /usr/local/bin/pluto
 ```
@@ -174,7 +174,7 @@ A **pluto_logs** table will be created in the database where you can check what 
 First download the project as a package
 
 ```bash
-go get -v github.com/astrolink/pluto@v0.1.10
+go get -v github.com/astrolink/pluto@v0.1.11
 go mod vendor
 ```
 

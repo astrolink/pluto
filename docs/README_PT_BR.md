@@ -55,7 +55,7 @@ Baixe o pacote de instalação mais recente
 Se você já tem o wget instalado use, caso não tenha baixe ele usando o reposítorio de pacotes do seu S.O, ou utilize o método via CURL
 
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.10/pluto
+wget https://github.com/astrolink/pluto/releases/download/v0.1.11/pluto
 chmod 755 pluto
 mv pluto /usr/local/bin/pluto
 ```
@@ -67,7 +67,7 @@ ou
 Se você já tem o CURL instalado use
 
 ```bash
-curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.10/pluto
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.11/pluto
 chmod 755 pluto
 mv pluto /usr/local/bin/pluto
 ```
@@ -174,7 +174,7 @@ No banco de dados será criado uma tabela **pluto_logs** onde pode ser verificad
 Primeiro baixe o projeto como um pacote
 
 ```bash
-go get -v github.com/astrolink/pluto@v0.1.10
+go get -v github.com/astrolink/pluto@v0.1.11
 go mod vendor
 ```
 
