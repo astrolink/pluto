@@ -57,7 +57,7 @@ Download the latest installation package
 If you have wget utilize this, if dont download on your S.O or utilize other method
 
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-osx
+wget https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-osx
 chmod 755 pluto-osx
 mv pluto-osx /usr/local/bin/pluto
 ```
@@ -69,7 +69,7 @@ or
 If you have CURL utilize this
 
 ```bash
-curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-osx
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-osx
 chmod 755 pluto-osx
 mv pluto-osx /usr/local/bin/pluto
 ```
@@ -79,7 +79,7 @@ mv pluto-osx /usr/local/bin/pluto
 If you have wget utilize this, if dont download on your S.O or utilize other method
 
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-linux
+wget https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-linux
 sudo chmod +x pluto-linux
 mv pluto-linux /usr/local/bin/pluto
 ```
@@ -91,7 +91,7 @@ or
 If you have CURL utilize this
 
 ```bash
-curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-linux
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-linux
 sudo chmod +x pluto-linux
 mv pluto-linux /usr/local/bin/pluto
 ```
@@ -200,7 +200,7 @@ A **pluto_logs** table will be created in the database where you can check what 
 First download the project as a package
 
 ```bash
-go get -v github.com/astrolink/pluto@v0.1.12
+go get -v github.com/astrolink/pluto@v0.1.13
 go mod vendor
 ```
 
@@ -253,7 +253,7 @@ file pluto
 mv pluto pluto-osx
 
 // linux
-GOOS=linux GOARCH=arm64 go build -x
+GOOS=linux GOARCH=amd64 go build -x
 file pluto
 mv pluto pluto-linux
 
