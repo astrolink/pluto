@@ -80,7 +80,7 @@ If you have wget utilize this, if dont download on your S.O or utilize other met
 
 ```bash
 wget https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-linux
-sudo chmod +x 755 pluto-linux
+sudo chmod +x pluto-linux
 mv pluto-linux /usr/local/bin/pluto
 ```
 
@@ -92,7 +92,7 @@ If you have CURL utilize this
 
 ```bash
 curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-linux
-sudo chmod +x 755 pluto-linux
+sudo chmod +x pluto-linux
 mv pluto-linux /usr/local/bin/pluto
 ```
 
