@@ -58,5 +58,7 @@ pluto.yaml
 pluto.yml
 .migration
 migrations
-/pluto
+pluto
+pluto-osx
+pluto-linux
 test.txt

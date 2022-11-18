@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+
 	"github.com/charmbracelet/lipgloss"
 	"github.com/spf13/cobra"
 )
@@ -12,7 +13,7 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Get the pluto project version",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(greenLite.Render("Version: v0.1.11 \nPluto is installed correctly. Enjoy! 😎"))
+		fmt.Println(greenLite.Render("Version: v0.1.12 \nPluto is installed correctly. Enjoy! 😎"))
 	},
 }
 

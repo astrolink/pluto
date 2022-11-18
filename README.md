@@ -50,27 +50,53 @@ Thanks [Laravel](https://github.com/laravel/laravel) our migrations project was 
 
 Download the latest installation package
 
-### Install using wget
+### Install on OSX
+
+#### Install using wget
 
 If you have wget utilize this, if dont download on your S.O or utilize other method
 
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.11/pluto
-chmod 755 pluto
-mv pluto /usr/local/bin/pluto
+wget https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-osx
+chmod 755 pluto-osx
+mv pluto-osx /usr/local/bin/pluto
 ```
 
 or
 
-### Install using CURL
+#### Install using CURL
 
 If you have CURL utilize this
 
 ```bash
-curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.11/pluto
-chmod 755 pluto
-mv pluto /usr/local/bin/pluto
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-osx
+chmod 755 pluto-osx
+mv pluto-osx /usr/local/bin/pluto
 ```
+
+### Install on Linux
+
+If you have wget utilize this, if dont download on your S.O or utilize other method
+
+```bash
+wget https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-linux
+sudo chmod +x 755 pluto-linux
+mv pluto-linux /usr/local/bin/pluto
+```
+
+or
+
+#### Install using CURL
+
+If you have CURL utilize this
+
+```bash
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-linux
+sudo chmod +x 755 pluto-linux
+mv pluto-linux /usr/local/bin/pluto
+```
+
+#### Check install
 
 To check pluto is properly installed use
 
@@ -174,7 +200,7 @@ A **pluto_logs** table will be created in the database where you can check what 
 First download the project as a package
 
 ```bash
-go get -v github.com/astrolink/pluto@v0.1.11
+go get -v github.com/astrolink/pluto@v0.1.12
 go mod vendor
 ```
 
@@ -220,8 +246,19 @@ and run the following commands
 
 ```bash
 go mod tidy
-go build
-mv pluto /usr/local/bin/pluto
+
+// osx
+go build -x
+file pluto
+mv pluto pluto-osx
+
+// linux
+GOOS=linux GOARCH=arm64 go build -x
+file pluto
+mv pluto pluto-linux
+
+// install on OSX to test
+mv pluto pluto-osx /usr/local/bin/pluto
 ```
 
 ## ⚡ How to generate a new release

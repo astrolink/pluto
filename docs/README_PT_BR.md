@@ -50,27 +50,53 @@ Obrigado [Laravel](https://github.com/laravel/laravel) nosso projeto de migraç�
 
 Baixe o pacote de instalação mais recente
 
-### Instale usando o wget
+### Instale no OSX
+
+#### Instale usando o wget
 
 Se você já tem o wget instalado use, caso não tenha baixe ele usando o reposítorio de pacotes do seu S.O, ou utilize o método via CURL
 
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.11/pluto
-chmod 755 pluto
-mv pluto /usr/local/bin/pluto
+wget https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-osx
+chmod 755 pluto-osx
+mv pluto-osx /usr/local/bin/pluto
 ```
 
 ou
 
-### Instale usando o CURL
+#### Instale usando o CURL
 
 Se você já tem o CURL instalado use
 
 ```bash
-curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.11/pluto
-chmod 755 pluto
-mv pluto /usr/local/bin/pluto
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-osx
+chmod 755 pluto-osx
+mv pluto-osx /usr/local/bin/pluto
 ```
+
+### Instale no linux
+
+Se você já tem o wget instalado use, caso não tenha baixe ele usando o reposítorio de pacotes do seu S.O, ou utilize o método via CURL
+
+```bash
+wget https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-linux
+sudo chmod +x 755 pluto-linux
+mv pluto-linux /usr/local/bin/pluto
+```
+
+ou
+
+#### Install using CURL
+
+Se você já tem o CURL instalado use
+
+```bash
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.12/pluto-linux
+sudo chmod +x 755 pluto-linux
+mv pluto-linux /usr/local/bin/pluto
+```
+
+#### Checando a instalação
 
 Verifique se o pluto foi devidamente instalado usando:
 
@@ -174,7 +200,7 @@ No banco de dados será criado uma tabela **pluto_logs** onde pode ser verificad
 Primeiro baixe o projeto como um pacote
 
 ```bash
-go get -v github.com/astrolink/pluto@v0.1.11
+go get -v github.com/astrolink/pluto@v0.1.12
 go mod vendor
 ```
 
@@ -220,8 +246,19 @@ e rode os seguintes comandos
 
 ```bash
 go mod tidy
-go build
-mv pluto /usr/local/bin/pluto
+
+// osx
+go build -x
+file pluto
+mv pluto pluto-osx
+
+// linux
+GOOS=linux GOARCH=arm64 go build -x
+file pluto
+mv pluto pluto-linux
+
+// instalar no OSX para teste
+mv pluto pluto-osx /usr/local/bin/pluto
 ```
 
 ## ⚡ Como gerar um novo release
