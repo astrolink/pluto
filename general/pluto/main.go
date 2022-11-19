@@ -23,6 +23,8 @@ func RunRollback(files []fs.DirEntry, args []string) bool {
 }
 
 func ExecuteRun() {
+	var batch int = mysql.GetBatch(true)
+
 	var files []fs.DirEntry = storage.ReadFiles()
 
 	for _, file := range files {
@@ -31,23 +33,26 @@ func ExecuteRun() {
 
 			switch result.Database {
 			case "postgre":
-				postgre.Execute(result, file.Name(), "run")
+				postgre.Execute(result, file.Name(), "run", batch)
 			case "mysql":
-				mysql.Execute(result, file.Name(), "run")
+				mysql.Execute(result, file.Name(), "run", batch)
 			default:
-				mysql.Execute(result, file.Name(), "run")
+				mysql.Execute(result, file.Name(), "run", batch)
 			}
 		}
 	}
 }
 
 func ExecuteRollback(files []fs.DirEntry, args []string) {
+	var batch int = mysql.GetBatch(false)
+
 	sort.Slice(files, func(i, j int) bool { return files[i].Name() > files[j].Name() })
 
 	for _, file := range files {
 		if mysql.CheckRollback(file.Name()) {
 			if !file.IsDir() && strings.Contains(file.Name(), ".xml") {
 				var result storage.PlutoXml = storage.ReadXml(file.Name())
+				var lastbatch int = mysql.GetBatch(false)
 
 				switch result.Database {
 				case "postgre":
@@ -58,10 +63,14 @@ func ExecuteRollback(files []fs.DirEntry, args []string) {
 					mysql.Rollback(result, file.Name(), args[0])
 				}
 
-				if args[0] == "step=-1" {
+				if args[0] == "step=-1" && batch != lastbatch {
 					break
 				}
 			}
 		}
 	}
+}
+
+func ExecuteRestart() {
+	mysql.RecreatePlutoTable()
 }

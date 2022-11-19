@@ -15,7 +15,7 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-func Execute(result storage.PlutoXml, file string, cmd string) {
+func Execute(result storage.PlutoXml, file string, cmd string, batch int) {
 	if cmd == "" {
 		cmd = "run"
 	}

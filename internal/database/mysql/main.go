@@ -21,7 +21,7 @@ var red = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FF0000"))
 var green = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#7CFC00"))
 var orange = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFA500"))
 
-func Execute(result storage.PlutoXml, file string, cmd string) {
+func Execute(result storage.PlutoXml, file string, cmd string, batch int) {
 	if cmd == "" {
 		cmd = "run"
 	}
@@ -47,7 +47,7 @@ func Execute(result storage.PlutoXml, file string, cmd string) {
 
 		fmt.Println(green.Render("Migration " + file + " executed successfully"))
 
-		Log(file, 1, "Migration executed successfully", result.Description)
+		Log(file, 1, "Migration executed successfully", result, batch)
 	} else {
 		if cmd == "run" {
 			fmt.Println(red.Render("Migration already executed"))
@@ -57,10 +57,11 @@ func Execute(result storage.PlutoXml, file string, cmd string) {
 	db.Close()
 }
 
-func Log(file string, success int, message string, description string) {
+func Log(file string, success int, message string, xml storage.PlutoXml, batch int) {
 	var config string = env.GetMySQlConfig()
 	var source string = env.GetSource()
-	description = strings.Trim(description, " \n")
+	var author string = strings.Trim(xml.Author, " \n")
+	var description string = strings.Trim(xml.Description, " \n")
 	file = storage.RemoveExtensionFromFile(file)
 
 	db, err := sql.Open("mysql", config)
@@ -70,13 +71,11 @@ func Log(file string, success int, message string, description string) {
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 
-	_, execErr := db.Exec("CREATE TABLE IF NOT EXISTS `pluto_logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `source` varchar(255) NOT NULL, `date` datetime NOT NULL, `file` varchar(255) NOT NULL, `success` tinyint(1) NOT NULL DEFAULT '0', `message` text NOT NULL, `description` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;")
-	if execErr != nil {
-		fmt.Println(red.Render(execErr.Error()))
-		os.Exit(1)
-	}
+	CreatePlutoTable(db)
 
-	_, Err := db.Exec("INSERT INTO `pluto_logs` (`date`, `source`, `file`, `success`, `message`, `description`) VALUES (NOW(), '" + source + "', '" + file + "', " + strconv.Itoa(success) + ", '" + message + "', '" + description + "');")
+	_, Err := db.Exec(
+		"INSERT INTO pluto_logs (date, batch, source, file, success, message, author, description) VALUES (NOW(), " + strconv.Itoa(batch) + ", '" + source + "', '" + file + "', " + strconv.Itoa(success) + ", '" + message + "', '" + author + "', '" + description + "');",
+	)
 	if Err != nil {
 		fmt.Println(red.Render(Err.Error()))
 		os.Exit(1)
@@ -98,11 +97,7 @@ func Check(file string) bool {
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 
-	_, execErr := db.Exec("CREATE TABLE IF NOT EXISTS `pluto_logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `source` varchar(255) NOT NULL, `date` datetime NOT NULL, `file` varchar(255) NOT NULL, `success` tinyint(1) NOT NULL DEFAULT '0', `message` text NOT NULL, `description` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;")
-	if execErr != nil {
-		fmt.Println(red.Render(execErr.Error()))
-		os.Exit(1)
-	}
+	CreatePlutoTable(db)
 
 	var col string
 	sqlStatement := "SELECT id FROM `pluto_logs` WHERE (`file` = '" + file + "') AND (`source` = '" + source + "') AND (success = 1) LIMIT 1;"
@@ -131,11 +126,7 @@ func CheckRollback(file string) bool {
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 
-	_, execErr := db.Exec("CREATE TABLE IF NOT EXISTS `pluto_logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `source` varchar(255) NOT NULL, `date` datetime NOT NULL, `file` varchar(255) NOT NULL, `success` tinyint(1) NOT NULL DEFAULT '0', `message` text NOT NULL, `description` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;")
-	if execErr != nil {
-		fmt.Println(red.Render(execErr.Error()))
-		os.Exit(1)
-	}
+	CreatePlutoTable(db)
 
 	var col string
 	sqlStatement := "SELECT id FROM `pluto_logs` WHERE (`file` = '" + file + "') AND (`source` = '" + source + "') AND (success = 1) LIMIT 1;"
@@ -180,4 +171,78 @@ func Rollback(result storage.PlutoXml, file string, step string) {
 	fmt.Println(orange.Render("Rollback " + file + " executed successfully"))
 
 	db.Close()
+}
+
+func CreatePlutoTable(db *sql.DB) {
+	_, execErr := db.Exec(`
+		CREATE TABLE IF NOT EXISTS pluto_logs
+			(
+				id int(11) NOT NULL AUTO_INCREMENT,
+				source varchar(255) NOT NULL,
+				batch int(11) NOT NULL DEFAULT 1,
+				date datetime NOT NULL,
+				file varchar(255) NOT NULL,
+				success tinyint(1) NOT NULL DEFAULT 0,
+				message varchar(255) NOT NULL,
+				author varchar(255),
+				description text,
+				PRIMARY KEY (id),
+				UNIQUE KEY idx_id (id),
+				UNIQUE KEY idx_file (file)
+			) ENGINE=InnoDB;`,
+	)
+	if execErr != nil {
+		fmt.Println(red.Render(execErr.Error()))
+		os.Exit(1)
+	}
+}
+
+func RecreatePlutoTable() {
+	var config string = env.GetMySQlConfig()
+
+	db, err := sql.Open("mysql", config)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	db.SetConnMaxLifetime(time.Minute * 1)
+
+	var col string
+	sqlStatement := `DROP TABLE pluto_logs;`
+	row := db.QueryRow(sqlStatement)
+	err2 := row.Scan(&col)
+	if err2 == nil {
+		log.Fatal(err2)
+	}
+
+	CreatePlutoTable(db)
+
+	db.Close()
+}
+
+func GetBatch(reverse bool) int {
+	var config string = env.GetMySQlConfig()
+	var source string = env.GetSource()
+
+	db, err := sql.Open("mysql", config)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	db.SetConnMaxLifetime(time.Minute * 1)
+
+	var total int
+	if err := db.QueryRow("SELECT batch FROM pluto_logs WHERE (source = '" + source + "') ORDER BY batch DESC LIMIT 1;").Scan(&total); err != nil {
+		if err == sql.ErrNoRows {
+			return 1
+		}
+		return 1
+	}
+
+	if reverse {
+		total = total + 1
+	}
+
+	db.Close()
+	return total
 }
