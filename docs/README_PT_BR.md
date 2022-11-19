@@ -26,6 +26,10 @@
       <img alt="Go Report" src="https://goreportcard.com/badge/github.com/astrolink/pluto" />
    </a>
 
+  <a href="https://github.com/astrolink/pluto/actions?query=workflow%3A%22Go+Build%22++branch%3Amain">
+    <img alt="Go Build" src="https://github.com/astrolink/pluto/actions/workflows/go-build.yml/badge.svg">
+  </a>
+
    <br />
 </p>
 
@@ -52,48 +56,18 @@ Baixe o pacote de instalação mais recente
 
 ### Instale no OSX
 
-#### Instale usando o wget
-
-Se você já tem o wget instalado use, caso não tenha baixe ele usando o reposítorio de pacotes do seu S.O, ou utilize o método via CURL
-
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-osx
-chmod 755 pluto-osx
-mv pluto-osx /usr/local/bin/pluto
-```
-
-ou
-
-#### Instale usando o CURL
-
-Se você já tem o CURL instalado use
-
-```bash
-curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-osx
-chmod 755 pluto-osx
-mv pluto-osx /usr/local/bin/pluto
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.14/pluto-osx
+sudo chmod +x pluto-osx
+sudo mv pluto-osx /usr/local/bin/pluto
 ```
 
 ### Instale no linux
 
-Se você já tem o wget instalado use, caso não tenha baixe ele usando o reposítorio de pacotes do seu S.O, ou utilize o método via CURL
-
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-linux
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.14/pluto-linux
 sudo chmod +x pluto-linux
-mv pluto-linux /usr/local/bin/pluto
-```
-
-ou
-
-#### Install using CURL
-
-Se você já tem o CURL instalado use
-
-```bash
-curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-linux
-sudo chmod +x pluto-linux
-mv pluto-linux /usr/local/bin/pluto
+sudo mv pluto-linux /usr/local/bin/pluto
 ```
 
 #### Checando a instalação
@@ -101,7 +75,7 @@ mv pluto-linux /usr/local/bin/pluto
 Verifique se o pluto foi devidamente instalado usando:
 
 ```bash
-pluto -h
+pluto version
 ```
 
 ## 🏃 Utilizando
@@ -189,7 +163,13 @@ O arquivo XML deve estar em volta da estrutura pluto esse campo e todos os outro
 
 **Rollback**: Instrução SQL que será rodado na reversão
 
+**Author**: Quem criou a instrução SQL (Opcional)
+
 **Description**: Descrição do que é feito naquela migração será salvo no banco de dados
+
+## 📚 Documentação
+
+A documentação completa está disponível no site: https://astrolink.github.io/pluto
 
 ## 🖥️ Banco de dados
 
@@ -200,7 +180,7 @@ No banco de dados será criado uma tabela **pluto_logs** onde pode ser verificad
 Primeiro baixe o projeto como um pacote
 
 ```bash
-go get -v github.com/astrolink/pluto@v0.1.13
+go get -v github.com/astrolink/pluto@v0.1.14
 go mod vendor
 ```
 
@@ -277,6 +257,10 @@ git push origin v0.1.x
 - [ ] Melhorar tratamento de erros
 - [ ] Cobertura de 100% do código com teste
 - [ ] Mais comandos utéis de checagem de saúde
+
+## 🏗️ Quem contribuir
+
+Obrigado pelo interesse em contribuir! Por favor, consulte [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## 👋 Contribuidores
 

@@ -26,6 +26,10 @@
       <img alt="Go Report" src="https://goreportcard.com/badge/github.com/astrolink/pluto" />
    </a>
 
+  <a href="https://github.com/astrolink/pluto/actions?query=workflow%3A%22Go+Build%22++branch%3Amain">
+    <img alt="Go Build" src="https://github.com/astrolink/pluto/actions/workflows/go-build.yml/badge.svg">
+  </a>
+
    <br />
 </p>
 
@@ -52,48 +56,18 @@ Download the latest installation package
 
 ### Install on OSX
 
-#### Install using wget
-
-If you have wget utilize this, if dont download on your S.O or utilize other method
-
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-osx
-chmod 755 pluto-osx
-mv pluto-osx /usr/local/bin/pluto
-```
-
-or
-
-#### Install using CURL
-
-If you have CURL utilize this
-
-```bash
-curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-osx
-chmod 755 pluto-osx
-mv pluto-osx /usr/local/bin/pluto
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.14/pluto-osx
+sudo chmod +x 755 pluto-osx
+sudo mv pluto-osx /usr/local/bin/pluto
 ```
 
 ### Install on Linux
 
-If you have wget utilize this, if dont download on your S.O or utilize other method
-
 ```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-linux
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.14/pluto-linux
 sudo chmod +x pluto-linux
-mv pluto-linux /usr/local/bin/pluto
-```
-
-or
-
-#### Install using CURL
-
-If you have CURL utilize this
-
-```bash
-curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-linux
-sudo chmod +x pluto-linux
-mv pluto-linux /usr/local/bin/pluto
+sudo mv pluto-linux /usr/local/bin/pluto
 ```
 
 #### Check install
@@ -101,7 +75,7 @@ mv pluto-linux /usr/local/bin/pluto
 To check pluto is properly installed use
 
 ```bash
-pluto -h
+pluto version
 ```
 
 ## 🏃 Using
@@ -189,7 +163,13 @@ The XML file must be around the pluto structure this field and all others are ma
 
 **Rollback**: SQL statement that will be run on rollback
 
+**Author**: Who created the SQL statement (Optional)
+
 **Description**: Description of what is done in that migration will be saved in the database
+
+## 📚 Documentation
+
+Full documentation is available on the website: https://astrolink.github.io/pluto
 
 ## 🖥️ Database
 
@@ -200,7 +180,7 @@ A **pluto_logs** table will be created in the database where you can check what 
 First download the project as a package
 
 ```bash
-go get -v github.com/astrolink/pluto@v0.1.13
+go get -v github.com/astrolink/pluto@v0.1.14
 go mod vendor
 ```
 
@@ -277,6 +257,10 @@ git push origin v0.1.x
 - [ ] Improve error handling
 - [ ] 100% code coverage with testing
 - [ ] More useful health check commands
+
+## 🏗️ Contributing
+
+Thank you for your interest in contributing! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## 👋 Contributors
 

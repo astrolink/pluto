@@ -4,10 +4,10 @@
 
 Versions smaller than 0.13 don't have batch support so it's not recommended to use any of them.
 
-| Version   | Supported          |
-| --------- | ------------------ |
-| > 0.0.14  | :white_check_mark: |
-| < 0.0.13  | :x:                |
+| Version  | Supported          |
+| -------- | ------------------ |
+| > 0.0.14 | :white_check_mark: |
+| < 0.0.13 | :x:                |
 
 ## Reporting a Vulnerability
 
