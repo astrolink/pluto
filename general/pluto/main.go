@@ -74,3 +74,7 @@ func ExecuteRollback(files []fs.DirEntry, args []string) {
 func ExecuteRestart() {
 	mysql.RecreatePlutoTable()
 }
+
+func TestConnection() {
+	mysql.TestConnection()
+}
