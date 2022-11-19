@@ -70,11 +70,7 @@ func Log(file string, success int, message string, description string) {
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 
-	_, execErr := db.Exec("CREATE TABLE IF NOT EXISTS `pluto_logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `source` varchar(255) NOT NULL, `date` datetime NOT NULL, `file` varchar(255) NOT NULL, `success` tinyint(1) NOT NULL DEFAULT '0', `message` text NOT NULL, `description` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;")
-	if execErr != nil {
-		fmt.Println(red.Render(execErr.Error()))
-		os.Exit(1)
-	}
+	CreatePlutoTable(db)
 
 	_, Err := db.Exec("INSERT INTO `pluto_logs` (`date`, `source`, `file`, `success`, `message`, `description`) VALUES (NOW(), '" + source + "', '" + file + "', " + strconv.Itoa(success) + ", '" + message + "', '" + description + "');")
 	if Err != nil {
@@ -98,11 +94,7 @@ func Check(file string) bool {
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 
-	_, execErr := db.Exec("CREATE TABLE IF NOT EXISTS `pluto_logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `source` varchar(255) NOT NULL, `date` datetime NOT NULL, `file` varchar(255) NOT NULL, `success` tinyint(1) NOT NULL DEFAULT '0', `message` text NOT NULL, `description` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;")
-	if execErr != nil {
-		fmt.Println(red.Render(execErr.Error()))
-		os.Exit(1)
-	}
+	CreatePlutoTable(db)
 
 	var col string
 	sqlStatement := "SELECT id FROM `pluto_logs` WHERE (`file` = '" + file + "') AND (`source` = '" + source + "') AND (success = 1) LIMIT 1;"
@@ -131,11 +123,7 @@ func CheckRollback(file string) bool {
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 
-	_, execErr := db.Exec("CREATE TABLE IF NOT EXISTS `pluto_logs` (`id` int(11) NOT NULL AUTO_INCREMENT, `source` varchar(255) NOT NULL, `date` datetime NOT NULL, `file` varchar(255) NOT NULL, `success` tinyint(1) NOT NULL DEFAULT '0', `message` text NOT NULL, `description` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB;")
-	if execErr != nil {
-		fmt.Println(red.Render(execErr.Error()))
-		os.Exit(1)
-	}
+	CreatePlutoTable(db)
 
 	var col string
 	sqlStatement := "SELECT id FROM `pluto_logs` WHERE (`file` = '" + file + "') AND (`source` = '" + source + "') AND (success = 1) LIMIT 1;"
@@ -180,4 +168,28 @@ func Rollback(result storage.PlutoXml, file string, step string) {
 	fmt.Println(orange.Render("Rollback " + file + " executed successfully"))
 
 	db.Close()
+}
+
+func CreatePlutoTable(db *sql.DB) {
+	_, execErr := db.Exec(`
+		CREATE TABLE IF NOT EXISTS pluto_logs
+			(
+				id int(11) NOT NULL AUTO_INCREMENT,
+				source varchar(255) NOT NULL,
+				batch int(11) NOT NULL DEFAULT 1,
+				date datetime NOT NULL,
+				file varchar(255) NOT NULL,
+				success tinyint(1) NOT NULL DEFAULT 0,
+				message varchar(255) NOT NULL,
+				author varchar(255),
+				description text,
+				PRIMARY KEY (id),
+				UNIQUE KEY idx_id (id),
+				UNIQUE KEY idx_file (file)
+			) ENGINE=InnoDB;`,
+	)
+	if execErr != nil {
+		fmt.Println(red.Render(execErr.Error()))
+		os.Exit(1)
+	}
 }
