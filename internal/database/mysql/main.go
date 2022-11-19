@@ -21,7 +21,7 @@ var red = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FF0000"))
 var green = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#7CFC00"))
 var orange = lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFA500"))
 
-func Execute(result storage.PlutoXml, file string, cmd string) {
+func Execute(result storage.PlutoXml, file string, cmd string, batch int) {
 	if cmd == "" {
 		cmd = "run"
 	}
@@ -47,7 +47,7 @@ func Execute(result storage.PlutoXml, file string, cmd string) {
 
 		fmt.Println(green.Render("Migration " + file + " executed successfully"))
 
-		Log(file, 1, "Migration executed successfully", result)
+		Log(file, 1, "Migration executed successfully", result, batch)
 	} else {
 		if cmd == "run" {
 			fmt.Println(red.Render("Migration already executed"))
@@ -57,7 +57,7 @@ func Execute(result storage.PlutoXml, file string, cmd string) {
 	db.Close()
 }
 
-func Log(file string, success int, message string, xml storage.PlutoXml) {
+func Log(file string, success int, message string, xml storage.PlutoXml, batch int) {
 	var config string = env.GetMySQlConfig()
 	var source string = env.GetSource()
 	var author string = strings.Trim(xml.Author, " \n")
@@ -74,7 +74,7 @@ func Log(file string, success int, message string, xml storage.PlutoXml) {
 	CreatePlutoTable(db)
 
 	_, Err := db.Exec(
-		"INSERT INTO pluto_logs (date, source, file, success, message, author, description) VALUES (NOW(), '" + source + "', '" + file + "', " + strconv.Itoa(success) + ", '" + message + "', '" + author + "', '" + description + "');",
+		"INSERT INTO pluto_logs (date, batch, source, file, success, message, author, description) VALUES (NOW(), " + strconv.Itoa(batch) + ", '" + source + "', '" + file + "', " + strconv.Itoa(success) + ", '" + message + "', '" + author + "', '" + description + "');",
 	)
 	if Err != nil {
 		fmt.Println(red.Render(Err.Error()))
@@ -218,4 +218,33 @@ func RecreatePlutoTable() {
 	CreatePlutoTable(db)
 
 	db.Close()
+}
+
+func GetBatch() int {
+	var config string = env.GetMySQlConfig()
+	var source string = env.GetSource()
+
+	db, err := sql.Open("mysql", config)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	db.SetConnMaxLifetime(time.Minute * 1)
+
+	_, execErr := db.Exec("SELECT (batch + 1) as batch FROM pluto_logs WHERE (source = '" + source + "') ORDER BY batch DESC LIMIT 1;")
+	if execErr != nil {
+		fmt.Println(red.Render(execErr.Error()))
+		os.Exit(1)
+	}
+
+	var total int
+	if err := db.QueryRow("SELECT (batch + 1) as batch FROM pluto_logs WHERE (source = '" + source + "') ORDER BY batch DESC LIMIT 1;").Scan(&total); err != nil {
+		if err == sql.ErrNoRows {
+			return 1
+		}
+		return 1
+	}
+
+	db.Close()
+	return total
 }

@@ -23,6 +23,8 @@ func RunRollback(files []fs.DirEntry, args []string) bool {
 }
 
 func ExecuteRun() {
+	var batch = mysql.GetBatch()
+
 	var files []fs.DirEntry = storage.ReadFiles()
 
 	for _, file := range files {
@@ -31,11 +33,11 @@ func ExecuteRun() {
 
 			switch result.Database {
 			case "postgre":
-				postgre.Execute(result, file.Name(), "run")
+				postgre.Execute(result, file.Name(), "run", batch)
 			case "mysql":
-				mysql.Execute(result, file.Name(), "run")
+				mysql.Execute(result, file.Name(), "run", batch)
 			default:
-				mysql.Execute(result, file.Name(), "run")
+				mysql.Execute(result, file.Name(), "run", batch)
 			}
 		}
 	}
