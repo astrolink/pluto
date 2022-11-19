@@ -54,20 +54,22 @@ Obrigado [Laravel](https://github.com/laravel/laravel) nosso projeto de migraç�
 
 Baixe o pacote de instalação mais recente
 
-### Instale no OSX
+### Install on OSX
 
 ```bash
 curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.14/pluto-osx
-sudo chmod +x pluto-osx
-sudo mv pluto-osx /usr/local/bin/pluto
+sudo chmod +x pluto
+sudo mv pluto /usr/local/bin/pluto
 ```
 
-### Instale no linux
+or
+
+### Install on Linux
 
 ```bash
 curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.14/pluto-linux
-sudo chmod +x pluto-linux
-sudo mv pluto-linux /usr/local/bin/pluto
+sudo chmod +x pluto
+sudo mv pluto /usr/local/bin/pluto
 ```
 
 #### Checando a instalação

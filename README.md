@@ -46,7 +46,7 @@ Thanks [Laravel](https://github.com/laravel/laravel) our migrations project was 
 
 - Supports several types of databases: MySQL and PostgreSQL(Implemented);
 - The executable file is less than 20mb in size;
-- Supports Linux, Windows and Mac OS;
+- Supports Linux and Mac OS;
 - Multi Projects, you can have several projects connecting to the same database, and sharing migrations;
 - Uses XML as input language, being less bureaucratic and accepting very large sql statements
 
@@ -58,16 +58,18 @@ Download the latest installation package
 
 ```bash
 curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.14/pluto-osx
-sudo chmod +x 755 pluto-osx
-sudo mv pluto-osx /usr/local/bin/pluto
+sudo chmod +x pluto
+sudo mv pluto /usr/local/bin/pluto
 ```
+
+or
 
 ### Install on Linux
 
 ```bash
 curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.14/pluto-linux
-sudo chmod +x pluto-linux
-sudo mv pluto-linux /usr/local/bin/pluto
+sudo chmod +x pluto
+sudo mv pluto /usr/local/bin/pluto
 ```
 
 #### Check install
