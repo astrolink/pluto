@@ -246,3 +246,31 @@ func GetBatch(reverse bool) int {
 	db.Close()
 	return total
 }
+
+func TestConnection() bool {
+	var config string = env.GetMySQlConfig()
+	var checked bool = false
+
+	db, err := sql.Open("mysql", config)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	db.SetConnMaxLifetime(time.Minute * 1)
+
+	var col string
+	sqlStatement := "SELECT NOW() FROM DUAL;"
+	row := db.QueryRow(sqlStatement)
+	err2 := row.Scan(&col)
+	if err2 == nil {
+		checked = true
+		fmt.Println(green.Render("Database connection successful!"))
+	} else {
+		fmt.Println(red.Render("There was a problem with your connection check the configuration file"))
+		log.Fatal(err2)
+	}
+
+	db.Close()
+
+	return checked
+}
