@@ -163,7 +163,13 @@ The XML file must be around the pluto structure this field and all others are ma
 
 **Rollback**: SQL statement that will be run on rollback
 
+**Author**: Who created the SQL statement (Optional)
+
 **Description**: Description of what is done in that migration will be saved in the database
+
+## 📚 Documentation
+
+Full documentation is available on the website: https://astrolink.github.io/pluto
 
 ## 🖥️ Database
 

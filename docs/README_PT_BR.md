@@ -163,7 +163,13 @@ O arquivo XML deve estar em volta da estrutura pluto esse campo e todos os outro
 
 **Rollback**: Instrução SQL que será rodado na reversão
 
+**Author**: Quem criou a instrução SQL (Opcional)
+
 **Description**: Descrição do que é feito naquela migração será salvo no banco de dados
+
+## 📚 Documentação
+
+A documentação completa está disponível no site: https://astrolink.github.io/pluto
 
 ## 🖥️ Banco de dados
 
