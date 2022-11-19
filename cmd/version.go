@@ -1,3 +1,6 @@
+/*
+Copyright © 2022  Phelipe Galiotti
+*/
 package cmd
 
 import (
@@ -11,9 +14,9 @@ var greenLite = lipgloss.NewStyle().Foreground(lipgloss.Color("#7CFC00"))
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Get the pluto project version",
+	Short: "Get the pluto version",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(greenLite.Render("Version: v0.1.14 \nPluto is installed correctly. Enjoy! 😎"))
+		fmt.Println(greenLite.Render("Version: v0.1.14"))
 	},
 }
 
