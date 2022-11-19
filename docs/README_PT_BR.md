@@ -57,7 +57,7 @@ Baixe o pacote de instalação mais recente
 ### Instale no OSX
 
 ```bash
-curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-osx
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.14/pluto-osx
 sudo chmod +x pluto-osx
 sudo mv pluto-osx /usr/local/bin/pluto
 ```
@@ -65,7 +65,7 @@ sudo mv pluto-osx /usr/local/bin/pluto
 ### Instale no linux
 
 ```bash
-curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-linux
+curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.14/pluto-linux
 sudo chmod +x pluto-linux
 sudo mv pluto-linux /usr/local/bin/pluto
 ```
@@ -174,7 +174,7 @@ No banco de dados será criado uma tabela **pluto_logs** onde pode ser verificad
 Primeiro baixe o projeto como um pacote
 
 ```bash
-go get -v github.com/astrolink/pluto@v0.1.13
+go get -v github.com/astrolink/pluto@v0.1.14
 go mod vendor
 ```
 
