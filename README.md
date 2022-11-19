@@ -258,6 +258,10 @@ git push origin v0.1.x
 - [ ] 100% code coverage with testing
 - [ ] More useful health check commands
 
+## 🏗️ Contributing
+
+Thank you for your interest in contributing! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md)
+
 ## 👋 Contributors
 
 Many thanks to everyone who helped:

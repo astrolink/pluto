@@ -258,6 +258,10 @@ git push origin v0.1.x
 - [ ] Cobertura de 100% do código com teste
 - [ ] Mais comandos utéis de checagem de saúde
 
+## 🏗️ Quem contribuir
+
+Obrigado pelo interesse em contribuir! Por favor, consulte [CONTRIBUTING.md](CONTRIBUTING.md)
+
 ## 👋 Contribuidores
 
 Muito obrigado a todas que ajudaram:
