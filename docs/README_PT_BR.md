@@ -102,6 +102,12 @@ log: "mysql"
 source: "api" // Qual é a fonte de dados daquela migração
 ```
 
+Verifica se o arquivo de conexão foi configurado de forma correta
+
+```sh
+pluto test
+```
+
 Feito isso podemos executar o pluto
 
 ```sh
@@ -123,6 +129,12 @@ pluto make create_users_table
 
 Para criar uma nova migration rode o comando make com o nome que a migration vai ter
 é sugerido manter o padrão de nomenclatura.
+
+```sh
+pluto restart
+```
+
+Reseta a tabela do pluto na base de dados cuidado ao rodar
 
 ### Como usar
 
@@ -149,6 +161,9 @@ Para criar uma nova migration rode o comando make com o nome que a migration vai
     <rollback>
         DROP TABLE users;
     </rollback>
+    <author>
+        João Ninguém - joao.ninguem@example.com
+    </author>
     <description>
         PLUTO - Criado tabela de usuários
     </description>
