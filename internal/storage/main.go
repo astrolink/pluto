@@ -113,6 +113,7 @@ type PlutoXml struct {
 	Database    string   `xml:"database"`
 	Run         string   `xml:"run"`
 	Rollback    string   `xml:"rollback"`
+	Author      string   `xml:"author"`
 	Description string   `xml:"description"`
 }
 
@@ -213,6 +214,9 @@ func CreateNewMigrationXmlFile(file string) {
 		"    <rollback>\n" +
 		"        SELECT NOW() FROM DUAL;\n" +
 		"    </rollback>\n" +
+		"    <author>\n" +
+		"        John Doe - john.doe@example.com\n" +
+		"    </author>\n" +
 		"    <description>\n" +
 		"        Description of what makes the migration, as much information as possible\n" +
 		"    </description>\n" +

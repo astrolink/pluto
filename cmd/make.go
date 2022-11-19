@@ -68,14 +68,8 @@ func StrPad(input string, padLength int, padString string, padType string) strin
 
 	repeat := math.Ceil(float64(1) + (float64(padLength-padStringLength))/float64(padStringLength))
 
-	switch padType {
-	case "RIGHT":
-		output = input + strings.Repeat(padString, int(repeat))
-		output = output[:padLength]
-	case "LEFT":
-		output = strings.Repeat(padString, int(repeat)) + input
-		output = output[len(output)-padLength:]
-	}
+	output = strings.Repeat(padString, int(repeat)) + input
+	output = output[len(output)-padLength:]
 
 	return output
 }

@@ -47,7 +47,7 @@ func Execute(result storage.PlutoXml, file string, cmd string) {
 
 		fmt.Println(green.Render("Migration " + file + " executed successfully"))
 
-		Log(file, 1, "Migration executed successfully", result.Description)
+		Log(file, 1, "Migration executed successfully", result)
 	} else {
 		if cmd == "run" {
 			fmt.Println(red.Render("Migration already executed"))
@@ -57,10 +57,11 @@ func Execute(result storage.PlutoXml, file string, cmd string) {
 	db.Close()
 }
 
-func Log(file string, success int, message string, description string) {
+func Log(file string, success int, message string, xml storage.PlutoXml) {
 	var config string = env.GetMySQlConfig()
 	var source string = env.GetSource()
-	description = strings.Trim(description, " \n")
+	var author string = strings.Trim(xml.Author, " \n")
+	var description string = strings.Trim(xml.Description, " \n")
 	file = storage.RemoveExtensionFromFile(file)
 
 	db, err := sql.Open("mysql", config)
@@ -72,7 +73,9 @@ func Log(file string, success int, message string, description string) {
 
 	CreatePlutoTable(db)
 
-	_, Err := db.Exec("INSERT INTO `pluto_logs` (`date`, `source`, `file`, `success`, `message`, `description`) VALUES (NOW(), '" + source + "', '" + file + "', " + strconv.Itoa(success) + ", '" + message + "', '" + description + "');")
+	_, Err := db.Exec(
+		"INSERT INTO pluto_logs (date, source, file, success, message, author, description) VALUES (NOW(), '" + source + "', '" + file + "', " + strconv.Itoa(success) + ", '" + message + "', '" + author + "', '" + description + "');",
+	)
 	if Err != nil {
 		fmt.Println(red.Render(Err.Error()))
 		os.Exit(1)
