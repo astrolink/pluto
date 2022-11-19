@@ -26,6 +26,10 @@
       <img alt="Go Report" src="https://goreportcard.com/badge/github.com/astrolink/pluto" />
    </a>
 
+  <a href="https://github.com/astrolink/pluto/actions?query=workflow%3A%22Go+Build%22++branch%3Amain">
+    <img alt="Go Build" src="https://github.com/astrolink/pluto/actions/workflows/go-build.yml/badge.svg">
+  </a>
+
    <br />
 </p>
 
