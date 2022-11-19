@@ -220,7 +220,7 @@ func RecreatePlutoTable() {
 	db.Close()
 }
 
-func GetBatch() int {
+func GetBatch(reverse bool) int {
 	var config string = env.GetMySQlConfig()
 	var source string = env.GetSource()
 
@@ -231,18 +231,16 @@ func GetBatch() int {
 
 	db.SetConnMaxLifetime(time.Minute * 1)
 
-	_, execErr := db.Exec("SELECT (batch + 1) as batch FROM pluto_logs WHERE (source = '" + source + "') ORDER BY batch DESC LIMIT 1;")
-	if execErr != nil {
-		fmt.Println(red.Render(execErr.Error()))
-		os.Exit(1)
-	}
-
 	var total int
-	if err := db.QueryRow("SELECT (batch + 1) as batch FROM pluto_logs WHERE (source = '" + source + "') ORDER BY batch DESC LIMIT 1;").Scan(&total); err != nil {
+	if err := db.QueryRow("SELECT batch FROM pluto_logs WHERE (source = '" + source + "') ORDER BY batch DESC LIMIT 1;").Scan(&total); err != nil {
 		if err == sql.ErrNoRows {
 			return 1
 		}
 		return 1
+	}
+
+	if reverse {
+		total = total + 1
 	}
 
 	db.Close()
