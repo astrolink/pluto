@@ -52,48 +52,18 @@ Baixe o pacote de instalação mais recente
 
 ### Instale no OSX
 
-#### Instale usando o wget
-
-Se você já tem o wget instalado use, caso não tenha baixe ele usando o reposítorio de pacotes do seu S.O, ou utilize o método via CURL
-
-```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-osx
-chmod 755 pluto-osx
-mv pluto-osx /usr/local/bin/pluto
-```
-
-ou
-
-#### Instale usando o CURL
-
-Se você já tem o CURL instalado use
-
 ```bash
 curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-osx
-chmod 755 pluto-osx
-mv pluto-osx /usr/local/bin/pluto
+sudo chmod +x pluto-osx
+sudo mv pluto-osx /usr/local/bin/pluto
 ```
 
 ### Instale no linux
 
-Se você já tem o wget instalado use, caso não tenha baixe ele usando o reposítorio de pacotes do seu S.O, ou utilize o método via CURL
-
-```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-linux
-sudo chmod +x pluto-linux
-mv pluto-linux /usr/local/bin/pluto
-```
-
-ou
-
-#### Install using CURL
-
-Se você já tem o CURL instalado use
-
 ```bash
 curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-linux
 sudo chmod +x pluto-linux
-mv pluto-linux /usr/local/bin/pluto
+sudo mv pluto-linux /usr/local/bin/pluto
 ```
 
 #### Checando a instalação
@@ -101,7 +71,7 @@ mv pluto-linux /usr/local/bin/pluto
 Verifique se o pluto foi devidamente instalado usando:
 
 ```bash
-pluto -h
+pluto version
 ```
 
 ## 🏃 Utilizando

@@ -26,6 +26,10 @@
       <img alt="Go Report" src="https://goreportcard.com/badge/github.com/astrolink/pluto" />
    </a>
 
+  <a href="https://github.com/astrolink/pluto/actions?query=workflow%3ATest+branch%3Amain">
+    <img alt="Build states" src="https://github.com/astrolink/pluto/workflows/Test/badge.svg">
+  </a>
+
    <br />
 </p>
 
@@ -52,48 +56,18 @@ Download the latest installation package
 
 ### Install on OSX
 
-#### Install using wget
-
-If you have wget utilize this, if dont download on your S.O or utilize other method
-
-```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-osx
-chmod 755 pluto-osx
-mv pluto-osx /usr/local/bin/pluto
-```
-
-or
-
-#### Install using CURL
-
-If you have CURL utilize this
-
 ```bash
 curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-osx
-chmod 755 pluto-osx
-mv pluto-osx /usr/local/bin/pluto
+sudo chmod +x 755 pluto-osx
+sudo mv pluto-osx /usr/local/bin/pluto
 ```
 
 ### Install on Linux
 
-If you have wget utilize this, if dont download on your S.O or utilize other method
-
-```bash
-wget https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-linux
-sudo chmod +x pluto-linux
-mv pluto-linux /usr/local/bin/pluto
-```
-
-or
-
-#### Install using CURL
-
-If you have CURL utilize this
-
 ```bash
 curl -L -o pluto https://github.com/astrolink/pluto/releases/download/v0.1.13/pluto-linux
 sudo chmod +x pluto-linux
-mv pluto-linux /usr/local/bin/pluto
+sudo mv pluto-linux /usr/local/bin/pluto
 ```
 
 #### Check install
@@ -101,7 +75,7 @@ mv pluto-linux /usr/local/bin/pluto
 To check pluto is properly installed use
 
 ```bash
-pluto -h
+pluto version
 ```
 
 ## 🏃 Using
