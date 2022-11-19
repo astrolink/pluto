@@ -193,3 +193,26 @@ func CreatePlutoTable(db *sql.DB) {
 		os.Exit(1)
 	}
 }
+
+func RecreatePlutoTable() {
+	var config string = env.GetMySQlConfig()
+
+	db, err := sql.Open("mysql", config)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	db.SetConnMaxLifetime(time.Minute * 1)
+
+	var col string
+	sqlStatement := `DROP TABLE pluto_logs;`
+	row := db.QueryRow(sqlStatement)
+	err2 := row.Scan(&col)
+	if err2 == nil {
+		log.Fatal(err2)
+	}
+
+	CreatePlutoTable(db)
+
+	db.Close()
+}
