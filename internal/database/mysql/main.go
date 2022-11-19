@@ -100,7 +100,7 @@ func Check(file string) bool {
 	CreatePlutoTable(db)
 
 	var col string
-	sqlStatement := "SELECT id FROM `pluto_logs` WHERE (`file` = '" + file + "') AND (`source` = '" + source + "') AND (success = 1) LIMIT 1;"
+	sqlStatement := "SELECT id FROM pluto_logs WHERE (file = '" + file + "') AND (source = '" + source + "') AND (success = 1) LIMIT 1;"
 	row := db.QueryRow(sqlStatement)
 	err2 := row.Scan(&col)
 	if err2 != nil {
@@ -129,7 +129,7 @@ func CheckRollback(file string) bool {
 	CreatePlutoTable(db)
 
 	var col string
-	sqlStatement := "SELECT id FROM `pluto_logs` WHERE (`file` = '" + file + "') AND (`source` = '" + source + "') AND (success = 1) LIMIT 1;"
+	sqlStatement := "SELECT id FROM pluto_logs WHERE (file = '" + file + "') AND (source = '" + source + "') AND (success = 1) LIMIT 1;"
 	row := db.QueryRow(sqlStatement)
 	err2 := row.Scan(&col)
 	if err2 == nil {
@@ -159,7 +159,7 @@ func Rollback(result storage.PlutoXml, file string, step string) {
 		os.Exit(1)
 	}
 
-	_, delErr := db.Exec("DELETE FROM `pluto_logs` WHERE (`file` = '" + file + "') AND (`source` = '" + source + "');")
+	_, delErr := db.Exec("DELETE FROM pluto_logs WHERE (file = '" + file + "') AND (source = '" + source + "');")
 	if delErr != nil {
 		fmt.Println(red.Render("There was an error deleting rollback: " + file))
 		fmt.Println(red.Render(delErr.Error()))
