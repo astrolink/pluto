@@ -267,6 +267,7 @@ func TestConnection() bool {
 		fmt.Println(green.Render("Database connection successful!"))
 	} else {
 		fmt.Println(red.Render("There was a problem with your connection check the configuration file"))
+		log.Fatal(err2)
 	}
 
 	db.Close()
