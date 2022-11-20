@@ -181,6 +181,9 @@ func CreateMigrationXmlFile() {
 		"    <rollback>\n" +
 		"        DROP TABLE users;\n" +
 		"    </rollback>\n" +
+		"    <author>\n" +
+		"        John Doe - john.doe@example.com\n" +
+		"    </author>\n" +
 		"    <description>\n" +
 		"        Description of what makes the migration, as much information as possible\n" +
 		"    </description>\n" +
