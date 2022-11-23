@@ -187,8 +187,7 @@ func CreatePlutoTable(db *sql.DB) {
 				author varchar(255),
 				description text,
 				PRIMARY KEY (id),
-				UNIQUE KEY idx_id (id),
-				UNIQUE KEY idx_file (file)
+				UNIQUE KEY idx_id (id)
 			) ENGINE=InnoDB;`,
 	)
 	if execErr != nil {
