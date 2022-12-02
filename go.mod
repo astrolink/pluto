@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/c-bata/go-prompt v0.2.6
 	github.com/charmbracelet/lipgloss v0.6.0
-	github.com/go-sql-driver/mysql v1.6.0
+	github.com/go-sql-driver/mysql v1.7.0
 	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.14.0
 )
