@@ -38,7 +38,7 @@ English | [Português](docs/README_PT_BR.md)
 ## 📖 Introduction:
 
 Pluto is a dwarf planet and it represents transformation, change and reform.
-And our pluto helps the project that doesn't have database versioning to organize itself and be able to count on this very important resource these days.
+And our pluto helps the project that git remodoesn't have database versioning to organize itself and be able to count on this very important resource these days.
 
 Thanks [Laravel](https://github.com/laravel/laravel) our migrations project was inspired by how it handles this.
 
@@ -184,7 +184,15 @@ The XML file must be around the pluto structure this field and all others are ma
 
 **Description**: Description of what is done in that migration will be saved in the database
 
-## 📚 Documentation
+### Dealing with large volumes
+
+If you have a massive volume of data, try using `CDATA` tag to organize and scape your query string. Like this:
+
+```
+<![CDATA[ <insert_query_here> ]]>
+```
+
+## 📚 Documentation (in progress)
 
 Full documentation is available on the website: https://astrolink.github.io/pluto
 
@@ -275,7 +283,7 @@ git push origin v0.1.x
 - [ ] 100% code coverage with testing
 - [ ] More useful health check commands
 
-## 🏗️ Contributing
+## 🏗️ Contributing (in progress)
 
 Thank you for your interest in contributing! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md)
 
