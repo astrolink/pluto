@@ -184,7 +184,15 @@ The XML file must be around the pluto structure this field and all others are ma
 
 **Description**: Description of what is done in that migration will be saved in the database
 
-## 📚 Documentation
+### Dealing with large volumes
+
+If you have a massive volume of data, try using `CDATA` tag to organize and scape your query string. Like this:
+
+```xml
+<![CDATA[ <insert_query_here> ]]>
+```
+
+## 📚 Documentation (in progress)
 
 Full documentation is available on the website: https://astrolink.github.io/pluto
 
@@ -275,7 +283,7 @@ git push origin v0.1.x
 - [ ] 100% code coverage with testing
 - [ ] More useful health check commands
 
-## 🏗️ Contributing
+## 🏗️ Contributing (in progress)
 
 Thank you for your interest in contributing! Please refer to [CONTRIBUTING.md](CONTRIBUTING.md)
 
