@@ -38,7 +38,7 @@ English | [Português](docs/README_PT_BR.md)
 ## 📖 Introduction:
 
 Pluto is a dwarf planet and it represents transformation, change and reform.
-And our pluto helps the project that git remodoesn't have database versioning to organize itself and be able to count on this very important resource these days.
+And our pluto helps the project that doesn't have database versioning to organize itself and be able to count on this very important resource these days.
 
 Thanks [Laravel](https://github.com/laravel/laravel) our migrations project was inspired by how it handles this.
 
@@ -188,7 +188,7 @@ The XML file must be around the pluto structure this field and all others are ma
 
 If you have a massive volume of data, try using `CDATA` tag to organize and scape your query string. Like this:
 
-```
+```xml
 <![CDATA[ <insert_query_here> ]]>
 ```
 
