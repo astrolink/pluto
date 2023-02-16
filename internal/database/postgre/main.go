@@ -48,10 +48,6 @@ func Execute(result storage.PlutoXml, file string, cmd string, batch int) {
 		fmt.Println(green.Render("Migration " + file + " executed successfully"))
 
 		Log(file, 1, "Migration executed successfully", result, batch)
-	} else {
-		if cmd == "run" {
-			fmt.Println(red.Render("Migration already executed"))
-		}
 	}
 
 	db.Close()
