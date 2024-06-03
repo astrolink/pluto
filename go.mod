@@ -7,7 +7,7 @@ require (
 	github.com/charmbracelet/lipgloss v0.11.0
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/spf13/cobra v1.8.0
-	github.com/spf13/viper v1.18.2
+	github.com/spf13/viper v1.19.0
 )
 
 require (
@@ -26,7 +26,7 @@ require (
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/muesli/termenv v0.15.2 // indirect
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
-	github.com/pelletier/go-toml/v2 v2.1.0 // indirect
+	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/pkg/term v1.2.0-beta.2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
