@@ -7,7 +7,7 @@ toolchain go1.24.1
 require (
 	github.com/c-bata/go-prompt v0.2.6
 	github.com/charmbracelet/lipgloss v1.1.0
-	github.com/go-sql-driver/mysql v1.10.0
+	github.com/go-sql-driver/mysql v1.10.1
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/viper v1.21.0
 )
